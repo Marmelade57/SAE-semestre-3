@@ -6,3 +6,7 @@ Ce projet est créé par :
 - Tafiroult Djibril
 - De Andrade Vincent
 - Ait Bammou Zaïn 
+
+- - - - - - -
+
+Lien vers le document des spécifications : https://docs.google.com/document/d/1i-O0Z-eTWwqmUNS8ln96XBrS9b8omNXvWx3Yy4qn2gA/edit
