@@ -25,24 +25,47 @@ class PageAccueil extends StatelessWidget {
               const DrawerHeader(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 85, 85, 85),
+                  image: DecorationImage(image: AssetImage("../../images/logo.png"))
                 ),
                 child: Text(
-                  'La Tablée Onirique',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 24,
-                  ),
+                  '',
                 ),
               ),
               ListTile(
+                leading: const Icon(Icons.home_outlined),
                 title: const Text('Accueil'),
                 onTap: () => Navigator.pop(context),
               ),
               ListTile(
+                leading: const Icon(Icons.search_outlined),
                 title: const Text('Recherche'),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, '/recherche');
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.newspaper_outlined),
+                title: const Text('Actualité'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/actualite');
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.question_mark_outlined),
+                title: const Text('À propos'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/apropos');
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.login),
+                title: const Text('Connexion'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/connexion');
                 },
               ),
             ],
