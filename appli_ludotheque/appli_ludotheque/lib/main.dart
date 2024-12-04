@@ -13,14 +13,53 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Ludothèque',
-      theme: ThemeData(
-        primaryColor: const Color.fromARGB(255, 151, 151, 151),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 134, 134, 134),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 65, 65, 65),
-          elevation: 0,
-        ),
+      title: 'Ludothèque', // possibilité de faire un thème nuit
+      theme: ThemeData( // la police d'écriture est à changer dans pubspec.yaml
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.black,
+          primary: Colors.red,
+          onPrimary: Colors.pink,
+          secondary: Colors.blue,
+          onSecondary: Colors.blueGrey,
+          tertiary: Colors.lime,
+          onTertiary: Colors.orange,
+          surface: Colors.grey, // fond quand le scaffold n'est pas défini
+          onSurface: Colors.purple, // texte
+          /* surfaceContainer: Colors.white,
+          surfaceContainerHigh: Colors.white,
+          surfaceContainerHighest: Colors.white,
+          surfaceContainerLow: Colors.white,
+          surfaceContainerLowest: Colors.white,
+          errorContainer: Colors.white,
+          onErrorContainer: Colors.white,
+          primaryContainer: Colors.white,
+          onPrimaryContainer: Colors.white,
+          tertiaryContainer: Colors.white,
+          secondaryContainer: Colors.white,
+          onTertiaryContainer: Colors.white,
+          onSecondaryContainer: Colors.white, */
+          ),
+          iconTheme: const IconThemeData(
+            color:  Color(0xFF000000),
+          ),
+          drawerTheme: const DrawerThemeData(
+            backgroundColor: Color(0xFFaaaaaa),
+          ),
+          appBarTheme: const AppBarTheme(
+            color: Colors.teal, // là où il y a accueil et le menu
+            elevation: 0,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+            ),
+            titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+            ),
+          ),
+          scaffoldBackgroundColor: Colors.lightBlue, // le vrai fond
+          textTheme: const TextTheme(),
+          bottomAppBarTheme: const BottomAppBarTheme(),
       ),
       debugShowCheckedModeBanner: false,
       routes: {

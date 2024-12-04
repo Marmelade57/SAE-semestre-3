@@ -2,29 +2,26 @@ import 'package:flutter/material.dart';
 
 class PageAccueil extends StatelessWidget {
   const PageAccueil({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Accueil',
-            style: TextStyle(color: Color.fromARGB(221, 255, 255, 255))),
+        title: const Text('Accueil'),
         leading: Builder(
           builder: (context) => IconButton(
-            icon: const Icon(Icons.menu, color: Colors.black87),
+            icon: const Icon(Icons.menu),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
       ),
       drawer: Drawer(
-        child: Container(
-          color: const Color.fromARGB(255, 151, 151, 151),
-          child: ListView(
+        child: ListView(
             padding: EdgeInsets.zero,
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 85, 85, 85),
+                  //color: Color.fromARGB(255, 207, 205, 205),
                   image: DecorationImage(image: AssetImage("../../images/logo.png"))
                 ),
                 child: Text(
@@ -35,14 +32,6 @@ class PageAccueil extends StatelessWidget {
                 leading: const Icon(Icons.home_outlined),
                 title: const Text('Accueil'),
                 onTap: () => Navigator.pop(context),
-              ),
-              ListTile(
-                leading: const Icon(Icons.search_outlined),
-                title: const Text('Recherche'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/recherche');
-                },
               ),
               ListTile(
                 leading: const Icon(Icons.newspaper_outlined),
@@ -71,7 +60,6 @@ class PageAccueil extends StatelessWidget {
             ],
           ),
         ),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -104,8 +92,8 @@ class PageAccueil extends StatelessWidget {
   Widget _buildGameCard(String title) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
