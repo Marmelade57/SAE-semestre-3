@@ -1,0 +1,92 @@
+Page accueil
+-> Récupérer les données pour afficher les jeux
+CREATE TEMPORARY TABLE R1
+SELECT nom_tag as difficulte FROM JEU,CONTIENT,TAG
+WHERE TAG.id_tag = CONTIENT.id_tag
+AND JEU.id_jeu = CONTIENT.id_jeu
+AND type_tag = "Difficulté"
+AND JEU.id_jeu = x;
+
+CREATE TEMPORARY TABLE R2
+SELECT nom_tag as age FROM JEU,CONTIENT,TAG
+WHERE TAG.id_tag = CONTIENT.id_tag
+AND JEU.id_jeu = CONTIENT.id_jeu
+AND type_tag = "AgeMin"
+AND JEU.id_jeu = x;
+
+SELECT DISTINCT JEU.id_jeu, titre_jeu, lien_image,difficulte,age FROM JEU,CONTIENT,TAG,R1,R2
+WHERE TAG.id_tag = CONTIENT.id_tag
+AND JEU.id_jeu = CONTIENT.id_jeu
+AND JEU.id_jeu = x;
+
+
+-> Récupérer tous les tags
+SELECT id_tag,nom_tag FROM TAG
+
+
+
+Page d'un jeu
+-> Récupérer les tags liés au jeu
+SELECT DISTINCT TAG.id_tag,nom_tag,desc_tag,type_tag FROM JEU,CONTIENT,TAG
+WHERE TAG.id_tag = CONTIENT.id_tag
+AND JEU.id_jeu = CONTIENT.id_jeu
+AND JEU.id_jeu = x;
+
+-> Récupérer toutes les données du jeu
+SELECT * FROM JEU
+WHERE id_jeu = x
+
+
+
+Page des actualités
+-> Récupérer toutes les actualités
+SELECT * FROM ACTUALITE
+
+
+
+Page d'une actualité
+-> SELECT DISTINCT id_actu,nom_actu,desc_actu,lien_image,JEU.id_jeu FROM JEU,CONCERNE,ACTUALITE
+WHERE ACTUALITE.id_actu = CONCERNE.id_actu
+AND JEU.id_jeu = CONCERNE.id_jeu
+AND ACTUALITE.id_actu = x;
+
+
+
+Page ajout d'un jeu
+-> INSERT INTO JEU
+(id_jeu,titre_jeu,desc_jeu,disponible,
+ lien_image,lien_youtube,date_ajout,
+ date_publication,date_derniere_modif,
+ date_archivage,date_suppression)
+ VALUES
+ (x,"/","/",x,
+  "/","/","Date du jour",
+  "Date du jour ou date entrée",
+  "/","/","/")
+
+
+
+Page modification d'un jeu
+-> UPDATE JEU
+SET titre_jeu = "/",desc_jeu = "/", disponible = x,
+lien_image = "/", lien_youtube = "/", date_ajout = "Date du jour",
+date_publication = "Date du jour ou Date entrée", date_derniere_modif = "/", date_archivage = "/",
+date_suppression = "/"
+WHERE id_jeu = x
+
+
+
+Page ajout d'une actualité
+-> INSERT INTO JEU
+(id_actu,nom_actu,desc_actu,lien_image,date_actu)
+ VALUES
+ (x,"/","/","/","Date du jour")
+
+
+
+Page modification d'une actualité
+-> UPDATE ACTUALITE
+SET nom_actu = "/", desc_actu = "/",
+lien_image = "/", date_actu = "Date du jour"
+WHERE id_actu = x
+
