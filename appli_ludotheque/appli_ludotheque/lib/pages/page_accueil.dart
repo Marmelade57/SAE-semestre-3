@@ -38,7 +38,7 @@ class PageAccueil extends StatelessWidget {
                 title: const Text('Actualité'),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '/actualite');
+                  Navigator.pushNamed(context, '/actualites');
                 },
               ),
               ListTile(
@@ -75,7 +75,7 @@ class PageAccueil extends StatelessWidget {
                 crossAxisSpacing: 16,
                 children: List.generate(4, (index) {
                   return GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/jeu'),
+                    onTap: () => Navigator.pushNamed(context, '/jeu',  arguments: index),
                     child: _buildGameCard(
                       'Jeu n°${index + 1}'
                     ),

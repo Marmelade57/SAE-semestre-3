@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/page_accueil.dart';
 import 'pages/page_jeu.dart';
 import 'pages/page_resultat_recherche.dart';
+import 'pages/page_actualite.dart';
 
 void main() {
   runApp(const MyApp());
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
         "/accueil" : (context) => const PageAccueil(),
         "/jeu" : (context) => const PageJeu(),
         "/recherche" : (context) => const PageResultatRecherche(),
+        "/actualites" : (context) => const PageActualites(),
       },
       home: const PageAccueil(),
     );
