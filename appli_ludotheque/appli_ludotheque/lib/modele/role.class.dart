@@ -1,4 +1,5 @@
 import '../connexion.dart';
+import 'detient.class.dart';
 
 class Role {
   final int idRole;

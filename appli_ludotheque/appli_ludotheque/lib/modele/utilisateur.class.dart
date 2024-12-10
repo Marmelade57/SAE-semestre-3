@@ -30,7 +30,7 @@ class Utilisateur {
       final results = await conn.query('''
         SELECT u.*, r.nom_role, r.desc_role
         FROM UTILISATEUR u
-        LEFT JOIN ROLES r ON u.id_role = r.id_role
+        LEFT JOIN ROLE r ON u.id_role = r.id_role
       ''');
 
       List<Utilisateur> utilisateurs = results.map((row) {
