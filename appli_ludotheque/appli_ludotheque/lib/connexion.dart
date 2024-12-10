@@ -40,7 +40,6 @@ void main() async {
       dog.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-  }
 
   // A method that retrieves all the dogs from the dogs table.
   Future<List<Dog>> dogs() async {
