@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
@@ -40,6 +41,19 @@ void main() async {
       dog.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+=======
+import 'package:mysql1/mysql1.dart';
+
+class Connexion {
+  static Future<MySqlConnection> getConnexion() async {
+    return await MySqlConnection.connect(ConnectionSettings(
+      host: '51.38.64.145',
+      port: 3306,
+      user: 'sae',
+      password: '301',
+      db: 'SAE301',
+    ));
+>>>>>>> 7ba9c9c5d548b169afe1ca3ffa5130c9cb41f3c7
   }
 
   // A method that retrieves all the dogs from the dogs table.
