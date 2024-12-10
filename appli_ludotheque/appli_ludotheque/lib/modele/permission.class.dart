@@ -64,7 +64,7 @@ class Permission {
   }
 
   //Pour récupérer les roles associés à la permission
-  Future<List<int>> getJeux() async {
+  Future<List<int>> getRoles() async {
     return await Detient.fetchRolesByPermission(idPerm);
   }
 

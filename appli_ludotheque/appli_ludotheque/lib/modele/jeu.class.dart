@@ -102,7 +102,7 @@ class Jeu {
   }
 
   // Pour récupérer les actualités associés au jeu
-  Future<List<int>> getTags() async {
+  Future<List<int>> getActualites() async {
     return await Concerne.fetchActualitesByJeu(idJeu);
   }
 
