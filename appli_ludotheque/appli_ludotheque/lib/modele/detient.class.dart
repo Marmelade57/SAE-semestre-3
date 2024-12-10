@@ -18,7 +18,7 @@ class Detient{
   }
 
   //Méthode pour récupérer tout les permissions associés à un rôle
-  static Future<List<int>> fetchPermsByRole(int idRole) async {
+  static Future<List<int>> fetchPermissionsByRole(int idRole) async {
     final conn = await Connexion.getConnexion();
 
     try {
@@ -30,7 +30,7 @@ class Detient{
       // On retourne la liste des `id_perm`
       return results.map((row) => row['id_perm'] as int).toList();
     } catch (e) {
-      print('Erreur lors de la récupération des tags pour le jeu $idRole : $e');
+      print('Erreur lors de la récupération des permissions pour le rôle $idRole : $e');
       return [];
     } finally {
       await conn.close();
@@ -39,7 +39,7 @@ class Detient{
 
   
   //Méthode pour récupérer tout les permissions associés à un rôle
-  static Future<List<int>> fetchRolesByPerm(int idPerm) async {
+  static Future<List<int>> fetchRolesByPermission(int idPerm) async {
     final conn = await Connexion.getConnexion();
 
     try {
@@ -48,10 +48,10 @@ class Detient{
         [idPerm],
       );
 
-      // On retourne la liste des `id_perm`
+      // On retourne la liste des `id_role`
       return results.map((row) => row['id_role'] as int).toList();
     } catch (e) {
-      print('Erreur lors de la récupération des tags pour le jeu $idPerm : $e');
+      print('Erreur lors de la récupération des rôles pour la permission $idPerm : $e');
       return [];
     } finally {
       await conn.close();
