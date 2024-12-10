@@ -35,8 +35,8 @@ class Jeu {
       titreJeu: map['titre_jeu'],
       descJeu: map['desc_jeu'],
       disponible: map['disponible'] == 1,
-      lienImg: map['lien_img'],
-      lienYT: map['lien_yt'],
+      lienImg: map['lien_image'],
+      lienYT: map['lien_youtube'],
       dateAjout: DateTime.parse(map['date_ajout']),
       datePublication: map['date_publication'] != null
           ? DateTime.parse(map['date_publication'])
