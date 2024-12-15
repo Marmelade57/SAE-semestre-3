@@ -92,8 +92,9 @@ class PageJeu extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -103,7 +104,10 @@ class PageJeu extends StatelessWidget {
                     ),
                     child: const Text(
                       "Description",
-                      style: TextStyle(),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
 
@@ -112,6 +116,8 @@ class PageJeu extends StatelessWidget {
                   GridView.count(
                     crossAxisCount: 3,
                     shrinkWrap: true,
+                    childAspectRatio: double.parse("5"),
+                    crossAxisSpacing: 16,
                     physics: const NeverScrollableScrollPhysics(), // c'est quoi ? Demander à Gabin
                     children: List.generate(3, (index) {
                       return GestureDetector(
@@ -122,6 +128,20 @@ class PageJeu extends StatelessWidget {
                       );
                     }),
                   ),
+
+                  const SizedBox(height: 16),
+
+                  Container(
+                    height: 250,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Text(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit leo, mattis sed suscipit sit amet, dignissim non mi. Pellentesque accumsan et turpis eget dignissim. Suspendisse potenti. Donec elementum mollis molestie. Aenean et faucibus metus. Duis sit amet lorem enim. Maecenas viverra magna in magna volutpat, ac ultrices urna suscipit. Nam rutrum blandit tempus. Cras tempor tempor est, vel pharetra nisl consequat a. Nam ultrices tellus et aliquet imperdiet. Pellentesque tempus pharetra ipsum a tincidunt. Donec vehicula non sem cursus vestibulum. Praesent non sollicitudin urna. \n Nulla quis posuere metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis elementum nisi nec imperdiet suscipit. Suspendisse sit amet efficitur velit. Praesent rhoncus sagittis dui vel aliquam. Etiam ut eleifend dolor. Fusce tristique risus quis auctor hendrerit. Aliquam vehicula, lectus sed porta sollicitudin, nibh velit euismod odio, eget aliquet eros odio vel arcu. Aliquam vehicula dui interdum tincidunt sagittis. Sed cursus leo quis augue auctor posuere. Curabitur vel bibendum quam. Suspendisse ut sem sit amet nunc lobortis finibus. Sed maximus ullamcorper velit, at laoreet orci sodales vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi sagittis ullamcorper mi eu iaculis."
+                    ),
+                  )
                 ],
               )
             ],
@@ -133,11 +153,19 @@ class PageJeu extends StatelessWidget {
 
   Widget _buildCarteTag(String nomTag){
     return Container(
-      height: 10,
-      width: 10,
-      color: Colors.white,
-      child: Text(
-        nomTag
+      
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Text(
+            nomTag,
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
