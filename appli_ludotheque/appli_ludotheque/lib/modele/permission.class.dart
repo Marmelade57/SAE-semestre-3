@@ -40,31 +40,8 @@ class Permission {
     }
   }
 
-  //Pour récupérer une permission spécifique par ID
-  static Future<Permission?> fetchById(int idPerm) async {
-    final conn = await Connexion.getConnexion();
-
-    try {
-      final results = await conn.query(
-        'SELECT * FROM PERMISSION WHERE id_perm = ?',
-        [idPerm],
-      );
-
-      if (results.isNotEmpty) {
-        return Permission.fromMap(results.first.fields);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print("Erreur lors de la récupération de la permission $idPerm : $e");
-      return null;
-    } finally {
-      await conn.close();
-    }
-  }
-
   //Pour récupérer les roles associés à la permission
-  Future<List<int>> getJeux() async {
+  Future<List<int>> getRoles() async {
     return await Detient.fetchRolesByPermission(idPerm);
   }
 

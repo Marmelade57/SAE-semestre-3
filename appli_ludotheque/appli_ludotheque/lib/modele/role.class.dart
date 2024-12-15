@@ -1,4 +1,5 @@
 import '../connexion.dart';
+import 'detient.class.dart';
 
 class Role {
   final int idRole;
@@ -22,7 +23,7 @@ class Role {
   static Future<List<Role>> fetchAll() async {
     final conn = await Connexion.getConnexion();
     try {
-      final results = await conn.query('SELECT * FROM ROLES');
+      final results = await conn.query('SELECT * FROM ROLE');
 
       List<Role> roles = results.map((row) {
         return Role.fromMap(row.fields);
@@ -35,5 +36,10 @@ class Role {
     } finally {
       await conn.close();
     }
+  }
+
+  //Pour récupérer les permissions associées au rôle
+  Future<List<int>> getPermissions() async {
+    return await Detient.fetchPermissionsByRole(idRole);
   }
 }

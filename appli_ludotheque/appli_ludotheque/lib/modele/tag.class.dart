@@ -1,4 +1,5 @@
 import "../connexion.dart";
+import 'contient.class.dart';
 
 class Tag{
   final int idTag ;
@@ -41,5 +42,33 @@ factory Tag.fromMap(Map<String, dynamic> map) {
     } finally {
       await conn.close();
     }
+  }
+
+  //Pour récupérer un tag spécifique par ID
+  static Future<Tag?> fetchById(int idTag) async {
+    final conn = await Connexion.getConnexion();
+
+    try {
+      final results = await conn.query(
+        'SELECT * FROM TAG WHERE id_tag = ?',
+        [idTag],
+      );
+
+      if (results.isNotEmpty) {
+        return Tag.fromMap(results.first.fields);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Erreur lors de la récupération du tag $idTag : $e');
+      return null;
+    } finally {
+      await conn.close();
+    }
+  }
+
+  //Pour récupérer les jeux associés au tag
+  Future<List<int>> getJeux() async {
+    return await Contient.fetchJeuxByTag(idTag);
   }
 }

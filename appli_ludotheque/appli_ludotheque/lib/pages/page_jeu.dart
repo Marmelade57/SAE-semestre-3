@@ -153,7 +153,6 @@ class PageJeu extends StatelessWidget {
 
   Widget _buildCarteTag(String nomTag){
     return Container(
-      
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: Colors.white,
