@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// ---- NB : Ajouter lien vers les réseaux
+
 class PagePresentation extends StatelessWidget {
   const PagePresentation({super.key});
 

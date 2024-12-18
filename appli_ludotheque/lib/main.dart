@@ -4,6 +4,7 @@ import 'pages/page_jeu.dart';
 import 'pages/page_resultat_recherche.dart';
 import 'pages/page_actualites.dart';
 import 'pages/page_actualite.dart';
+import 'pages/page_presentation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
         "/recherche" : (context) => const PageResultatRecherche(),
         "/actualites" : (context) => const PageActualites(),
         "/actu" : (context) => const PageActualite(),
+        "/apropos" : (context) => const PagePresentation(),
       },
       home: const PageAccueil(),
     );
