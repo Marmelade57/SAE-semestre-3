@@ -1,133 +1,44 @@
 import 'package:flutter/material.dart';
 
-class PageActualites extends StatelessWidget {
-  const PageActualites({super.key});
-  
+class PageActualite extends StatelessWidget {
+  const PageActualite({super.key}); // , titre
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Actualités'),
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
+        title: const Text('Article n°'),
       ),
-      drawer: Drawer(
-        child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  //color: Color.fromARGB(255, 207, 205, 205),
-                  image: DecorationImage(image: AssetImage("../../images/logo.png"))
-                ),
-                child: Text(
-                  '',
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home_outlined),
-                title: const Text('Accueil'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/accueil');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.newspaper_outlined),
-                title: const Text('Actualité'),
-                onTap: () => Navigator.pop(context),
-              ),
-              ListTile(
-                leading: const Icon(Icons.question_mark_outlined),
-                title: const Text('À propos'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/apropos');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.login),
-                title: const Text('Connexion'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/connexion');
-                },
-              ),
-            ],
-          ),
-        ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GridView.count(
-                crossAxisCount: 1,
-                shrinkWrap: true,
-                childAspectRatio: double.parse("1.25"),
-                physics: const NeverScrollableScrollPhysics(), // c'est quoi ? Demander à Gabin
-                mainAxisSpacing: 32,
-                children: List.generate(4, (index) {
-                  return GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/act'),
-                    child: _buildGameCard(
-                      'Nom actualité n°${index + 1}',
-                      "Ceci est la description courte de l'actualité numéro ${index + 1}"
-                    ),
-                  );
-                }),
+        child :Column(
+          children: [
+            Container(
+              height: 250,
+              width: 350,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGameCard(String titre, String contenu) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Expanded(
-            child: Icon(Icons.image, size: 50),
-          ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 185, 185, 184),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(8),
-                bottomRight: Radius.circular(8),
+              child: const Icon(Icons.image, size: 64),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Dernière modification : XX/XX/XXXX',
+              style: TextStyle(fontSize: 16),
+            ),
+            Container(
+              height: 250,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Text(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit leo, mattis sed suscipit sit amet, dignissim non mi. Pellentesque accumsan et turpis eget dignissim. Suspendisse potenti. Donec elementum mollis molestie. Aenean et faucibus metus. Duis sit amet lorem enim. Maecenas viverra magna in magna volutpat, ac ultrices urna suscipit. Nam rutrum blandit tempus. Cras tempor tempor est, vel pharetra nisl consequat a. Nam ultrices tellus et aliquet imperdiet. Pellentesque tempus pharetra ipsum a tincidunt. Donec vehicula non sem cursus vestibulum. Praesent non sollicitudin urna. \n Nulla quis posuere metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis elementum nisi nec imperdiet suscipit. Suspendisse sit amet efficitur velit. Praesent rhoncus sagittis dui vel aliquam. Etiam ut eleifend dolor. Fusce tristique risus quis auctor hendrerit. Aliquam vehicula, lectus sed porta sollicitudin, nibh velit euismod odio, eget aliquet eros odio vel arcu. Aliquam vehicula dui interdum tincidunt sagittis. Sed cursus leo quis augue auctor posuere. Curabitur vel bibendum quam. Suspendisse ut sem sit amet nunc lobortis finibus. Sed maximus ullamcorper velit, at laoreet orci sodales vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi sagittis ullamcorper mi eu iaculis."
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "    $titre",
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  contenu,
-                  style: const TextStyle(fontStyle: FontStyle.italic),
-                  overflow: TextOverflow.fade,
-                )
-              ],
-            ),
-          ),
-        ],
+          ],
+        )
       ),
     );
   }
