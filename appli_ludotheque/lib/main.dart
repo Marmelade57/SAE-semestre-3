@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'pages/page_accueil.dart';
 import 'pages/page_jeu.dart';
 import 'pages/page_resultat_recherche.dart';
+import 'pages/page_actualites.dart';
 import 'pages/page_actualite.dart';
+import 'pages/page_presentation.dart';
+import 'pages/page_admin_accueil.dart';
+import 'pages/page_admin_creation_jeu.dart';
+import 'pages/page_admin_modif_jeu.dart';
+import 'pages/page_admin_creation_actualite.dart';
+import 'pages/page_admin_modif_actualite.dart';
+import 'pages/page_connexion.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,6 +76,14 @@ class MyApp extends StatelessWidget {
         "/jeu" : (context) => const PageJeu(),
         "/recherche" : (context) => const PageResultatRecherche(),
         "/actualites" : (context) => const PageActualites(),
+        "/actu" : (context) => const PageActualite(),
+        "/apropos" : (context) => const PagePresentation(),
+        "/adminaccueil" : (context) => const PageAccueil(),
+        "/connexion" : (context) => const PageAdminAccueil(),
+        "/admincreationjeu" : (context) => const PageAdminCreationJeu(),
+        "/adminmodifjeu" : (context) => const PageAdminModifJeu(),
+        "/admincreationactu" : (context) => const PageAdminCreationActualite(),
+        "/adminmodifactu" : (context) => const PageAdminModifActualite(),
       },
       home: const PageAccueil(),
     );
