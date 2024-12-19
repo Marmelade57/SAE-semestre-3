@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// Aller dans le dossier du projet et faire "flutter pub get"
+import 'package:url_launcher/url_launcher.dart';
 
 class PageConnexion extends StatelessWidget {
   const PageConnexion({super.key});
@@ -120,7 +120,8 @@ class PageConnexion extends StatelessWidget {
 
                 IconButton(
                       onPressed: () {
-                        print('Redirection vers le site');},
+                        // ignore: deprecated_member_use
+                        launch("https://www.latableeonirique.com/");},
                       icon: Image.asset('../images/logo.png'),
                     ),
             ],

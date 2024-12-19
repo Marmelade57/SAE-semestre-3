@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 // Aller dans le dossier du projet et faire "flutter pub get"
 
 class PagePresentation extends StatelessWidget {
@@ -175,14 +176,17 @@ class PagePresentation extends StatelessWidget {
                     // Bouton Image Instagram
                     IconButton(
                       onPressed: () {
-                        print('Redirection vers Instagram');},
+                        // ignore: deprecated_member_use
+                        launch("https://www.instagram.com/latableeonirique/");
+                        },
                       icon: Image.asset('../images/instagram.png', width: 40, height: 40),
                     ),
                     const SizedBox(width: 16), // Espacement entre les images
                     // Bouton Image Facebook
                     IconButton(
                       onPressed: () {
-                        print('Redirection vers Facebook');},
+                        // ignore: deprecated_member_use
+                        launch("https://www.facebook.com/Latableeonirique/");},
                       icon: Image.asset('../images/facebook.png', width: 40, height: 40),
                     ),
                   ],
