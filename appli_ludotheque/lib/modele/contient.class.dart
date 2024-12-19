@@ -20,6 +20,12 @@ class Contient {
   static Future<List<int>> fetchTagsByJeu(int idJeu) async {
     final conn = await Connexion.getConnexion();
 
+    // Vérification de la connexion
+    if (conn == null) {
+      print('Erreur : Connexion à la base de données échouée');
+      return []; // Retourne une liste vide si la connexion échoue
+    }
+
     try {
       final results = await conn.query(
         'SELECT id_tag FROM CONTIENT WHERE id_jeu = ?',
@@ -29,9 +35,11 @@ class Contient {
       // On retourne la liste des `id_tag`
       return results.map((row) => row['id_tag'] as int).toList();
     } catch (e) {
+      // Gestion des erreurs
       print('Erreur lors de la récupération des tags pour le jeu $idJeu : $e');
-      return [];
+      return []; // Retourne une liste vide en cas d'erreur
     } finally {
+      // Fermeture de la connexion
       await conn.close();
     }
   }
@@ -39,6 +47,12 @@ class Contient {
   // Méthode pour récupérer tous les jeux associés à un tag
   static Future<List<int>> fetchJeuxByTag(int idTag) async {
     final conn = await Connexion.getConnexion();
+
+    // Vérification de la connexion
+    if (conn == null) {
+      print('Erreur : Connexion à la base de données échouée');
+      return []; // Retourne une liste vide si la connexion échoue
+    }
 
     try {
       final results = await conn.query(
@@ -49,9 +63,11 @@ class Contient {
       // On retourne la liste des `id_jeu`
       return results.map((row) => row['id_jeu'] as int).toList();
     } catch (e) {
+      // Gestion des erreurs
       print('Erreur lors de la récupération des jeux pour le tag $idTag : $e');
-      return [];
+      return []; // Retourne une liste vide en cas d'erreur
     } finally {
+      // Fermeture de la connexion
       await conn.close();
     }
   }

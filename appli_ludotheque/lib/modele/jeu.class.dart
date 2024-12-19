@@ -53,9 +53,14 @@ class Jeu {
     );
   }
 
-  //Pour récupérer tous les jeux
+  // Pour récupérer tous les jeux
   static Future<List<Jeu>> fetchAll() async {
-    final conn = await Connexion.getConnexion();
+    var conn = await Connexion.getConnexion();
+    
+    if (conn == null) {
+      print('Connexion échouée');
+      return [];  // Retourne une liste vide si la connexion échoue
+    }
 
     try {
       final results = await conn.query('SELECT * FROM JEU');
@@ -73,9 +78,14 @@ class Jeu {
     }
   }
 
-  //Pour récupérer un jeu spécifique par ID
+  // Pour récupérer un jeu spécifique par ID
   static Future<Jeu?> fetchById(int idJeu) async {
-    final conn = await Connexion.getConnexion();
+    var conn = await Connexion.getConnexion();
+    
+    if (conn == null) {
+      print('Connexion échouée');
+      return null;
+    }
 
     try {
       final results = await conn.query(
@@ -96,15 +106,13 @@ class Jeu {
     }
   }
 
-  //Pour récupérer les tags associés au jeu
+  // Récupérer les tags associés au jeu
   Future<List<int>> getTags() async {
     return await Contient.fetchTagsByJeu(idJeu);
   }
 
-  // Pour récupérer les actualités associés au jeu
+  // Récupérer les actualités associés au jeu
   Future<List<int>> getActualites() async {
     return await Concerne.fetchActualitesByJeu(idJeu);
   }
-
-  
 }

@@ -25,15 +25,22 @@ class Utilisateur {
 
   static Future<List<Utilisateur>> fetchAll() async {
     final conn = await Connexion.getConnexion();
+    
+    // Vérification de la connexion
+    if (conn == null) {
+      print('Erreur : Connexion à la base de données échouée');
+      return []; // Retourne une liste vide si la connexion échoue
+    }
 
     try {
       final results = await conn.query('''
-        SELECT u.*, r.nom_role, r.desc_role
+        SELECT u.*, r.id_role, r.nom_role, r.desc_role
         FROM UTILISATEUR u
         LEFT JOIN ROLE r ON u.id_role = r.id_role
       ''');
 
       List<Utilisateur> utilisateurs = results.map((row) {
+        // Si le rôle existe, on le crée
         Role? role;
         if (row['id_role'] != null) {
           role = Role(
@@ -42,14 +49,17 @@ class Utilisateur {
             descRole: row['desc_role'],
           );
         }
+        // On crée et retourne l'utilisateur avec son rôle
         return Utilisateur.fromMap(row.fields, role: role);
       }).toList();
 
       return utilisateurs;
     } catch (e) {
-      print('Erreur : $e');
-      return [];
+      // Gestion des erreurs
+      print('Erreur lors de la récupération des utilisateurs : $e');
+      return []; // Retourne une liste vide en cas d'erreur
     } finally {
+      // Fermeture de la connexion
       await conn.close();
     }
   }

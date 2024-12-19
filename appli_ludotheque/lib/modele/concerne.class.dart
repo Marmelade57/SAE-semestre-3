@@ -20,6 +20,12 @@ class Concerne {
   static Future<List<int>> fetchJeuxByActualite(int idActu) async {
     final conn = await Connexion.getConnexion();
 
+    // Vérification de la connexion
+    if (conn == null) {
+      print('Erreur : Connexion à la base de données échouée');
+      return []; // Retourne une liste vide si la connexion échoue
+    }
+
     try {
       final results = await conn.query(
         'SELECT id_jeu FROM CONCERNE WHERE id_actu = ?',
@@ -29,9 +35,11 @@ class Concerne {
       // On retourne la liste des `id_jeu`
       return results.map((row) => row['id_jeu'] as int).toList();
     } catch (e) {
+      // Gestion des erreurs
       print("Erreur lors de la récupération des jeux pour l'actualité $idActu : $e");
-      return [];
+      return []; // Retourne une liste vide en cas d'erreur
     } finally {
+      // Fermeture de la connexion
       await conn.close();
     }
   }
@@ -39,6 +47,12 @@ class Concerne {
   // Méthode pour récupérer toutes les actualités associées à un jeu
   static Future<List<int>> fetchActualitesByJeu(int idJeu) async {
     final conn = await Connexion.getConnexion();
+
+    // Vérification de la connexion
+    if (conn == null) {
+      print('Erreur : Connexion à la base de données échouée');
+      return []; // Retourne une liste vide si la connexion échoue
+    }
 
     try {
       final results = await conn.query(
@@ -49,9 +63,11 @@ class Concerne {
       // On retourne la liste des `id_actu`
       return results.map((row) => row['id_actu'] as int).toList();
     } catch (e) {
+      // Gestion des erreurs
       print('Erreur lors de la récupération des actualités pour le jeu $idJeu : $e');
-      return [];
+      return []; // Retourne une liste vide en cas d'erreur
     } finally {
+      // Fermeture de la connexion
       await conn.close();
     }
   }

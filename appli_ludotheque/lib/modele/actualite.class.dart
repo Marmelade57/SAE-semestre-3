@@ -13,7 +13,7 @@ class Actualite {
     required this.nomActu,
     required this.descActu,
     required this.lienImg,
-    this.dateActu
+    this.dateActu,
   });
 
   factory Actualite.fromMap(Map<String, dynamic> map) {
@@ -22,13 +22,20 @@ class Actualite {
       nomActu: map['nom_actu'],
       descActu: map['desc_actu'],
       lienImg: map['lien_image'],
-      dateActu: DateTime.parse(map['date_actu'])
+      dateActu: map['date_actu'] != null
+          ? DateTime.parse(map['date_actu'])
+          : null,
     );
   }
 
-  //Pour récupérer toutes les actualités
+  // Pour récupérer toutes les actualités
   static Future<List<Actualite>> fetchAll() async {
-    final conn = await Connexion.getConnexion();
+    var conn = await Connexion.getConnexion();
+
+    if (conn == null) {
+      print('Connexion échouée');
+      return [];  // Retourne une liste vide si la connexion échoue
+    }
 
     try {
       final results = await conn.query('SELECT * FROM ACTUALITE');
@@ -46,9 +53,14 @@ class Actualite {
     }
   }
 
-  //Pour récupérer une actualité spécifique par ID
+  // Pour récupérer une actualité spécifique par ID
   static Future<Actualite?> fetchById(int idActu) async {
-    final conn = await Connexion.getConnexion();
+    var conn = await Connexion.getConnexion();
+
+    if (conn == null) {
+      print('Connexion échouée');
+      return null;
+    }
 
     try {
       final results = await conn.query(
@@ -69,10 +81,8 @@ class Actualite {
     }
   }
 
-  //Pour récupérer les jeux associés à l'actualité
+  // Pour récupérer les jeux associés à l'actualité
   Future<List<int>> getJeux() async {
     return await Concerne.fetchJeuxByActualite(idActu);
   }
-
-  
 }

@@ -1,9 +1,8 @@
-
 import "../connexion.dart";
-class Detient{
+
+class Detient {
   final int idRole;
   final int idPerm;
-
 
   Detient({
     required this.idRole,
@@ -17,9 +16,15 @@ class Detient{
     );
   }
 
-  //Méthode pour récupérer tout les permissions associés à un rôle
+  // Méthode pour récupérer toutes les permissions associées à un rôle
   static Future<List<int>> fetchPermissionsByRole(int idRole) async {
     final conn = await Connexion.getConnexion();
+    
+    // Vérification de la connexion
+    if (conn == null) {
+      print('Erreur : Connexion à la base de données échouée');
+      return []; // Retourne une liste vide si la connexion échoue
+    }
 
     try {
       final results = await conn.query(
@@ -30,17 +35,24 @@ class Detient{
       // On retourne la liste des `id_perm`
       return results.map((row) => row['id_perm'] as int).toList();
     } catch (e) {
+      // Gestion des erreurs
       print('Erreur lors de la récupération des permissions pour le rôle $idRole : $e');
-      return [];
+      return []; // Retourne une liste vide en cas d'erreur
     } finally {
+      // Fermeture de la connexion
       await conn.close();
     }
   }
 
-  
-  //Méthode pour récupérer tout les permissions associés à un rôle
+  // Méthode pour récupérer tous les rôles associés à une permission
   static Future<List<int>> fetchRolesByPermission(int idPerm) async {
     final conn = await Connexion.getConnexion();
+
+    // Vérification de la connexion
+    if (conn == null) {
+      print('Erreur : Connexion à la base de données échouée');
+      return []; // Retourne une liste vide si la connexion échoue
+    }
 
     try {
       final results = await conn.query(
@@ -51,11 +63,12 @@ class Detient{
       // On retourne la liste des `id_role`
       return results.map((row) => row['id_role'] as int).toList();
     } catch (e) {
+      // Gestion des erreurs
       print('Erreur lors de la récupération des rôles pour la permission $idPerm : $e');
-      return [];
+      return []; // Retourne une liste vide en cas d'erreur
     } finally {
+      // Fermeture de la connexion
       await conn.close();
     }
   }
-
 }

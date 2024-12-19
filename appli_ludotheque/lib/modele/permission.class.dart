@@ -9,20 +9,25 @@ class Permission {
   Permission({
     required this.idPerm,
     required this.nomPerm,
-    required this.descPerm
+    required this.descPerm,
   });
 
   factory Permission.fromMap(Map<String, dynamic> map) {
-    return (
+    return Permission(
       idPerm: map['id_perm'],
       nomPerm: map['nom_perm'],
-      descPerm: map['desc_perm']
+      descPerm: map['desc_perm'],
     );
   }
 
-  //Pour récupérer toutes les permissions
+  // Pour récupérer toutes les permissions
   static Future<List<Permission>> fetchAll() async {
-    final conn = await Connexion.getConnexion();
+    var conn = await Connexion.getConnexion();
+
+    if (conn == null) {
+      print('Connexion échouée');
+      return [];  // Retourne une liste vide si la connexion échoue
+    }
 
     try {
       final results = await conn.query('SELECT * FROM PERMISSION');
@@ -40,10 +45,8 @@ class Permission {
     }
   }
 
-  //Pour récupérer les roles associés à la permission
+  // Pour récupérer les rôles associés à la permission
   Future<List<int>> getRoles() async {
     return await Detient.fetchRolesByPermission(idPerm);
   }
-
-  
 }
