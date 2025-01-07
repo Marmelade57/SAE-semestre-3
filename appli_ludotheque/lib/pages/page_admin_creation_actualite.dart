@@ -170,7 +170,7 @@ class _PageAdminCreationActualiteState extends State<PageAdminCreationActualite>
                     ],
                   ),
 
-                  SizedBox(height:32),
+                  const SizedBox(height:32),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Espacement égal entre les colonnes
@@ -214,7 +214,7 @@ class _PageAdminCreationActualiteState extends State<PageAdminCreationActualite>
                     ],
                   ),
 
-                  SizedBox(height:32),
+                  const SizedBox(height:32),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Espacement égal entre les colonnes
@@ -258,7 +258,7 @@ class _PageAdminCreationActualiteState extends State<PageAdminCreationActualite>
                     ],
                   ),
 
-                  SizedBox(height:32),
+                  const SizedBox(height:32),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Espacement égal entre les colonnes
@@ -302,7 +302,7 @@ class _PageAdminCreationActualiteState extends State<PageAdminCreationActualite>
                     ],
                   ),
 
-                  SizedBox(height:32),
+                  const SizedBox(height:32),
 
                   
                 ],

@@ -3,7 +3,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class PageAdminAccueil extends StatefulWidget {
   const PageAdminAccueil({super.key});
-
   @override
   _PageAdminAccueil createState() => _PageAdminAccueil();
 }
@@ -23,206 +22,99 @@ class _PageAdminAccueil extends State<PageAdminAccueil> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-                  const SizedBox(height: 8),
+              const SizedBox(height: 8),
               const Text(
                 'Bienvenue, Administrateur !',
                 style: TextStyle(
-                fontSize: 28,        // Taille de la police
-                fontWeight: FontWeight.bold, // Police en gras
-                color: Colors.black, // Couleur du texte
-              ),
+                  fontSize: 28,
+                ),
               ),
               const Divider(),
               const SizedBox(height: 8),
 
-                IconButton(
-                      onPressed: () {
-                        // ignore: deprecated_member_use
-                        launch("https://www.latableeonirique.com/");},
-                      icon: Image.asset('../images/logo.png'),
-                    ),
+              _logoUrl("../images/logo.png", "https://www.latableeonirique.com/"),
 
-                    const SizedBox(height:48),
+              const SizedBox(height:48),
 
-                    const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                "Ajouter à l'application",
-                style: TextStyle(
-                fontSize: 28,        // Taille de la police
-                fontWeight: FontWeight.bold, // Police en gras
-                color: Colors.black, // Couleur du texte
-              ),
-              ),
-                      SizedBox(height: 16),
-                    ],
-                  ),
-
-                  const SizedBox(height:8),
-
-                  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Espace entre les deux boutons
-                children: [
-              ElevatedButton(  
-                  onPressed: (){
-                    print("Ajout d'un jeu.");
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.grey[900],  // Couleur de fond vert
-                    foregroundColor: Colors.white,   // Couleur du texte blanche
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),  // Pas de coins arrondis
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 70.0), // Espacement interne
-                  ),
-                  child: const Text(
-                    "Jeu", 
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-
-                ElevatedButton(  
-                  onPressed: (){
-                    print("Ajout d'une actualité.");
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.grey[900],  // Couleur de fond vert
-                    foregroundColor: Colors.white,   // Couleur du texte blanche
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),  // Pas de coins arrondis
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 40.0), // Espacement interne
-                  ),
-                  child: const Text(
-                    "Actualité", 
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                ],
-              ),
+              _constructeurZoneBoutons("Ajouter à l'application", _constructeurBouton(context, "/admincreationjeu", "Jeu", Colors.grey[900]!), _constructeurBouton(context, "/admincreationactu", "Actualité",Colors.grey[900]!)),
 
               const SizedBox(height:64),
 
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                "Modifier les données",
-                style: TextStyle(
-                fontSize: 28,        // Taille de la police
-                fontWeight: FontWeight.bold, // Police en gras
-                color: Colors.black, // Couleur du texte
-              ),
-              ),
-                      SizedBox(height: 16),
-                    ],
-                  ),
-
-                  const SizedBox(height:8),
-
-                  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Espace entre les deux boutons
-                children: [
-              ElevatedButton(  
-                  onPressed: (){
-                    print("Modification d'un jeu.");
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.grey[900],  // Couleur de fond vert
-                    foregroundColor: Colors.white,   // Couleur du texte blanche
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),  // Pas de coins arrondis
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 70.0), // Espacement interne
-                  ),
-                  child: const Text(
-                    "Jeu", 
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-
-                ElevatedButton(  
-                  onPressed: (){
-                    print("Modification d'une actualité.");
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.grey[900],  // Couleur de fond vert
-                    foregroundColor: Colors.white,   // Couleur du texte blanche
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),  // Pas de coins arrondis
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 40.0), // Espacement interne
-                  ),
-                  child: const Text(
-                    "Actualité", 
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                ],
-              ),
+              _constructeurZoneBoutons("Modifier les données",_constructeurBouton(context, "/adminmodifjeu", "Jeu", Colors.grey[900]!), _constructeurBouton(context, "/adminmodifactu", "Actualité", Colors.grey[900]!)),
 
               const SizedBox(height:80),
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Espace entre les deux boutons
                 children: [
-              ElevatedButton(  
-                  onPressed: (){
-                    print("Déconnexion effectuée.");
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.red[800],  // Couleur de fond vert
-                    foregroundColor: Colors.white,   // Couleur du texte blanche
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),  // Pas de coins arrondis
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 40.0), // Espacement interne
-                  ),
-                  child: const Text(
-                    "Déconnexion", 
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                  _constructeurBouton(context, "/accueil", "Déconnexion", Colors.red[800]!),
                 ],
               ),
-                ],
+            ],
+          ),
         ),
       ),
-      ),
-      );
+    );
   }
 
-  Widget _buildCarteTag(String nomTag){
-    return Container(
-      padding: const EdgeInsets.all(4),
-      margin: const EdgeInsets.only(right: 20, left : 20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+  Widget _logoUrl(String cheminLogo, String url){
+    return IconButton(
+      onPressed: () {
+        // ignore: deprecated_member_use
+        launch(url);
+      },
+      icon: Image.asset(cheminLogo),
+    );
+  }
+
+  Widget _constructeurBouton(BuildContext context, String url, String texteBouton, Color couleurFond){
+    return ElevatedButton(  
+      onPressed: (){
+        Navigator.pushNamed(context, url);
+      },
+      style: TextButton.styleFrom(
+        backgroundColor: couleurFond,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 70.0), // Espacement interne
       ),
-      child: Row(
-        children: [
-          Text(
-            nomTag,
-            textAlign: TextAlign.center,
-          ),
-        ],
+      child: Text(
+        texteBouton, 
+        style: const TextStyle(
+          fontSize: 24,
+        ),
       ),
+    );
+  }
+
+  Widget _constructeurZoneBoutons(String titrePartie, Widget bouton1, Widget bouton2){
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              titrePartie,
+              style: const TextStyle(
+                fontSize: 28,
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
+
+        const SizedBox(height:8),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Espace entre les deux boutons
+          children: [
+            bouton1,
+            bouton2,
+          ],
+        ),
+      ]
     );
   }
 }

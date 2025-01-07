@@ -1,65 +1,15 @@
 import 'package:flutter/material.dart';
 
-class PageActualites extends StatelessWidget {
-  const PageActualites({super.key});
-  
+class PageActualite extends StatelessWidget {
+  const PageActualite({super.key}); //String title, 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Actualités'),
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
+        title: const Text(""), // Ajouter dynamiquement le titre
       ),
-      drawer: Drawer(
-        child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  //color: Color.fromARGB(255, 207, 205, 205),
-                  image: DecorationImage(image: AssetImage("../../images/logo.png"))
-                ),
-                child: Text(
-                  '',
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home_outlined),
-                title: const Text('Accueil'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/accueil');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.newspaper_outlined),
-                title: const Text('Actualité'),
-                onTap: () => Navigator.pop(context),
-              ),
-              ListTile(
-                leading: const Icon(Icons.question_mark_outlined),
-                title: const Text('À propos'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/apropos');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.login),
-                title: const Text('Connexion'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/connexion');
-                },
-              ),
-            ],
-          ),
-        ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
@@ -75,7 +25,7 @@ class PageActualites extends StatelessWidget {
                 children: List.generate(4, (index) {
                   return GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/act'),
-                    child: _buildGameCard(
+                    child: _constructeurCarteActu(
                       'Nom actualité n°${index + 1}',
                       "Ceci est la description courte de l'actualité numéro ${index + 1}"
                     ),
@@ -89,7 +39,7 @@ class PageActualites extends StatelessWidget {
     );
   }
 
-  Widget _buildGameCard(String titre, String contenu) {
+  Widget _constructeurCarteActu(String titre, String contenu) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),

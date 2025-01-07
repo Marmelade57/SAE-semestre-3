@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class PageResultatRecherche extends StatelessWidget {
-  const PageResultatRecherche({super.key});
-
+class PageActualites extends StatelessWidget {
+  const PageActualites({super.key});
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recherche'),
+        title: const Text('Actualités'),
         leading: Builder(
           builder: (context) => IconButton(
-            icon: const Icon(Icons.menu), 
+            icon: const Icon(Icons.menu),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
@@ -20,34 +20,36 @@ class PageResultatRecherche extends StatelessWidget {
         child: _contenuMenu(context),
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _barreDeRecherche(),
-
-            const SizedBox(height: 16),
-            
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
-                children: List.generate(6, (index) {
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GridView.count(
+                crossAxisCount: 1,
+                shrinkWrap: true,
+                childAspectRatio: double.parse("1.25"),
+                physics: const NeverScrollableScrollPhysics(),
+                mainAxisSpacing: 32,
+                children: List.generate(4, (index) {
                   return GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/jeu'),
-                    child: _constructeurCarteJeu('Jeu n°${index + 1}'),
+                    onTap: () => Navigator.pushNamed(context, '/actu'),
+                    child: _constructeurCarteActu(
+                      'Nom actualité n°${index + 1}',
+                      "Ceci est la description courte de l'actualité numéro ${index + 1}"
+                    ),
                   );
                 }),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-    Widget _contenuMenu(BuildContext context){
+  Widget _contenuMenu(BuildContext context){
     return ListView(
       padding: EdgeInsets.zero,
       children: [
@@ -62,15 +64,15 @@ class PageResultatRecherche extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.home_outlined),
           title: const Text('Accueil'),
-          onTap: () => Navigator.pop(context, '/accueil'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/accueil');
+          }
         ),
         ListTile(
           leading: const Icon(Icons.newspaper_outlined),
           title: const Text('Actualités'),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.pushNamed(context, '/actualites');
-          },
+          onTap: () => Navigator.pop(context),
         ),
         ListTile(
           leading: const Icon(Icons.question_mark_outlined),
@@ -92,22 +94,7 @@ class PageResultatRecherche extends StatelessWidget {
     );
   }
 
-  Widget _barreDeRecherche() { // ??? est-ce que c'est ça
-    return TextField(
-      decoration: InputDecoration(
-        hintText: 'Rechercher un jeu...',
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
-        prefixIcon: const Icon(Icons.search),
-      ),
-    );
-  }
-
-  Widget _constructeurCarteJeu(String titre) {
+  Widget _constructeurCarteActu(String titre, String contenu) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -133,9 +120,15 @@ class PageResultatRecherche extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  titre,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  "    $titre",
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  overflow: TextOverflow.ellipsis,
                 ),
+                Text(
+                  contenu,
+                  style: const TextStyle(fontStyle: FontStyle.italic),
+                  overflow: TextOverflow.fade,
+                )
               ],
             ),
           ),

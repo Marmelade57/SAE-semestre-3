@@ -8,7 +8,7 @@ class PageAdminCreationJeu extends StatefulWidget {  // **Modification : Passage
 }
 
 class _PageAdminCreationJeuState extends State<PageAdminCreationJeu> {
-var _tagDifficulte = "Non défini";
+  var _tagDifficulte = "Non défini";
   var _tagNbJoueursMin = "Non défini";
   var _tagNbJoueursMax = "Non défini";
   var _tagType = "Non défini";

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           tertiary: Colors.lime,
           onTertiary: Colors.orange,
           surface: Colors.grey, // fond quand le scaffold n'est pas défini
-          onSurface: Colors.purple, // texte
+          onSurface: Colors.black, // texte
           /* surfaceContainer: Colors.white,
           surfaceContainerHigh: Colors.white,
           surfaceContainerHighest: Colors.white,

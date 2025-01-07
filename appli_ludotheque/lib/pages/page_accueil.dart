@@ -15,51 +15,11 @@ class PageAccueil extends StatelessWidget {
           ),
         ),
       ),
+
       drawer: Drawer(
-        child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  //color: Color.fromARGB(255, 207, 205, 205),
-                  image: DecorationImage(image: AssetImage("../../images/logo.png"))
-                ),
-                child: Text(
-                  '',
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home_outlined),
-                title: const Text('Accueil'),
-                onTap: () => Navigator.pop(context),
-              ),
-              ListTile(
-                leading: const Icon(Icons.newspaper_outlined),
-                title: const Text('Actualité'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/actualites');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.question_mark_outlined),
-                title: const Text('À propos'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/apropos');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.login),
-                title: const Text('Connexion'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/connexion');
-                },
-              ),
-            ],
-          ),
-        ),
+        child: _contenuMenu(context),
+      ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -76,7 +36,7 @@ class PageAccueil extends StatelessWidget {
                 children: List.generate(4, (index) {
                   return GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/jeu',  arguments: index),
-                    child: _buildGameCard(
+                    child: _constructeurCarteJeu(
                       'Jeu n°${index + 1}'
                     ),
                   );
@@ -89,7 +49,7 @@ class PageAccueil extends StatelessWidget {
     );
   }
 
-  Widget _buildGameCard(String title) {
+  Widget _constructeurCarteJeu(String titre) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -115,14 +75,58 @@ class PageAccueil extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  titre,
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _contenuMenu(BuildContext context){
+    return ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        const DrawerHeader(
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage("../../images/logo.png"))
+          ),
+          child: Text(
+            '',
+          ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.home_outlined),
+          title: const Text('Accueil'),
+          onTap: () => Navigator.pop(context),
+        ),
+        ListTile(
+          leading: const Icon(Icons.newspaper_outlined),
+          title: const Text('Actualités'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/actualites');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.question_mark_outlined),
+          title: const Text('À propos'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/apropos');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.login),
+          title: const Text('Connexion'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/connexion');
+          },
+        ),
+      ],
     );
   }
 }
