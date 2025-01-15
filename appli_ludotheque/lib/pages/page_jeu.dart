@@ -89,12 +89,6 @@ class PageJeu extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8),
-              SizedBox(height: 16),
-              Text(
-                'Description du jeu actuel',
-                style: TextStyle(fontSize: 16),
-              ),
             ],
           ),
         ),

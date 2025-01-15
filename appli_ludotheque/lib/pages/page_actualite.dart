@@ -22,15 +22,21 @@ class PageActualite extends StatelessWidget {
                 childAspectRatio: double.parse("1.25"),
                 physics: const NeverScrollableScrollPhysics(), // c'est quoi ? Demander à Gabin
                 mainAxisSpacing: 32,
-                children: List.generate(4, (index) {
+                children: [
+                  _constructeurCarteActu(
+                    "Nom actualité n°1", 
+                    "Ceci est la description courte de l'actualité numéro 1")
+                ]
+                
+                /* List.generate(4, (index) {
                   return GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/act'),
                     child: _constructeurCarteActu(
                       'Nom actualité n°${index + 1}',
-                      "Ceci est la description courte de l'actualité numéro ${index + 1}"
+                      
                     ),
                   );
-                }),
+                }), */
               ),
             ],
           ),
@@ -40,45 +46,58 @@ class PageActualite extends StatelessWidget {
   }
 
   Widget _constructeurCarteActu(String titre, String contenu) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Expanded(
-            child: Icon(Icons.image, size: 50),
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.white,
           ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 185, 185, 184),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(8),
-                bottomRight: Radius.circular(8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Expanded(
+                child: Icon(Icons.image, size: 50),
               ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "    $titre",
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  overflow: TextOverflow.ellipsis,
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 185, 185, 184),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
                 ),
-                Text(
-                  contenu,
-                  style: const TextStyle(fontStyle: FontStyle.italic),
-                  overflow: TextOverflow.fade,
-                )
-              ],
-            ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "    $titre",
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
+        Container(
+          decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 185, 185, 184),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(8),
+            bottomRight: Radius.circular(8),
+          ),
+        ),
+        child: Text(
+          contenu,
+          style: const TextStyle(fontStyle: FontStyle.italic),
+          overflow: TextOverflow.fade,
+        ),
       ),
+      ],
     );
   }
 }

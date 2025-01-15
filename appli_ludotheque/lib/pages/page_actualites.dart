@@ -110,7 +110,7 @@ class PageActualites extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 185, 185, 184),
+              color: Color.fromARGB(255, 52, 166, 191),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(8),
                 bottomRight: Radius.circular(8),

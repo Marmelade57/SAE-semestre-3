@@ -9,6 +9,16 @@ class PagePresentation extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Présentation'),
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+      ),
+
+      drawer: Drawer(
+        child: _contenuMenu(context),
       ),
       
       body: SingleChildScrollView(
@@ -151,4 +161,48 @@ class PagePresentation extends StatelessWidget {
     );
   }
 
+  Widget _contenuMenu(BuildContext context){
+    return ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        const DrawerHeader(
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage("../../images/logo.png"))
+          ),
+          child: Text(
+            '',
+          ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.home_outlined),
+          title: const Text('Accueil'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/accueil');
+          }
+        ),
+        ListTile(
+          leading: const Icon(Icons.newspaper_outlined),
+          title: const Text('Actualités'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/actualites');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.question_mark_outlined),
+          title: const Text('À propos'),
+          onTap: () => Navigator.pop(context),
+        ),
+        ListTile(
+          leading: const Icon(Icons.login),
+          title: const Text('Connexion'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/connexion');
+          },
+        ),
+      ],
+    );
+  }
 }
