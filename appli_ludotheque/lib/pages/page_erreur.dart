@@ -9,7 +9,6 @@ class PageErreur extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Erreur'),
       ),
-
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

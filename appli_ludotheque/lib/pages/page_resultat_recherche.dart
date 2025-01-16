@@ -10,24 +10,20 @@ class PageResultatRecherche extends StatelessWidget {
         title: const Text('Recherche'),
         leading: Builder(
           builder: (context) => IconButton(
-            icon: const Icon(Icons.menu), 
+            icon: const Icon(Icons.menu),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
       ),
-
       drawer: Drawer(
         child: _contenuMenu(context),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             _barreDeRecherche(),
-
             const SizedBox(height: 16),
-            
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -47,14 +43,14 @@ class PageResultatRecherche extends StatelessWidget {
     );
   }
 
-    Widget _contenuMenu(BuildContext context){
+  Widget _contenuMenu(BuildContext context) {
     return ListView(
       padding: EdgeInsets.zero,
       children: [
         const DrawerHeader(
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage("../../images/logo.png"))
-          ),
+              image:
+                  DecorationImage(image: AssetImage("../../images/logo.png"))),
           child: Text(
             '',
           ),
@@ -92,7 +88,8 @@ class PageResultatRecherche extends StatelessWidget {
     );
   }
 
-  Widget _barreDeRecherche() { // ??? est-ce que c'est ça
+  Widget _barreDeRecherche() {
+    // ??? est-ce que c'est ça
     return TextField(
       decoration: InputDecoration(
         hintText: 'Rechercher un jeu...',

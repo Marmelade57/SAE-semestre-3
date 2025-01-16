@@ -45,8 +45,27 @@ class DAO {
       final response =
           await http.get(Uri.parse('$baseUrl?table=$table&action=getAll'));
 
-      print(response.body);
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        try {
+          var result = json.decode(response.body);
+          return List<Map<String, dynamic>>.from(result);
+        } catch (e) {
+          print('Erreur lors du parsing du JSON : $e');
+        }
+      } else {
+        print('Réponse vide ou invalide');
+      }
+    } catch (e) {
+      print('Erreur lors de la récupération des données de $table : $e');
+    }
+    return [];
+  }
 
+  Future<List<Map<String, dynamic>>> getAllById(int id, String table) async {
+    try {
+      final response = await http
+          .get(Uri.parse('$baseUrl?table=$table&action=getAllById&id=$id'));
+      print(response.body);
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         try {
           var result = json.decode(response.body);
