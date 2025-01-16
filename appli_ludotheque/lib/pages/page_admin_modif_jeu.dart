@@ -109,7 +109,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               Text(
                 _displayNomImage,
                 style: const TextStyle(
@@ -141,14 +141,14 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                           const Text(
                             "Difficulté",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
                               color: Colors
                                   .black, // Changement de couleur du texte
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 6),
                           Container(
-                            width: 150,
+                            width: 120,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
@@ -158,6 +158,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                             child: DropdownButton<String>(
                               value:
                                   _tagDifficulte, // Afficher la valeur sélectionnée
+                              isExpanded: true,
                               items: [
                                 DropdownMenuItem<String>(
                                   value: _tagDifficulte, // La valeur affichée
@@ -183,14 +184,14 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                           const Text(
                             "Âge minimal",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
                               color: Colors
                                   .black, // Changement de couleur du texte
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 6),
                           Container(
-                            width: 150,
+                            width: 120,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
@@ -200,6 +201,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                             child: DropdownButton<String>(
                               value:
                                   _tagAgeMin, // Afficher la valeur sélectionnée
+                              isExpanded: true,
                               items: [
                                 DropdownMenuItem<String>(
                                   value: _tagAgeMin, // La valeur affichée
@@ -225,14 +227,14 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                           const Text(
                             "Âge maximal",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
                               color: Colors
                                   .black, // Changement de couleur du texte
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 6),
                           Container(
-                            width: 150,
+                            width: 120,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
@@ -242,6 +244,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                             child: DropdownButton<String>(
                               value:
                                   _tagAgeMax, // Afficher la valeur sélectionnée
+                              isExpanded: true,
                               items: [
                                 DropdownMenuItem<String>(
                                   value: _tagAgeMax, // La valeur affichée
@@ -276,13 +279,13 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                               const Text(
                                 "Type",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.black, // Couleur du texte
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Container(
-                                width: 150,
+                                width: 120,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
@@ -292,6 +295,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                                 child: DropdownButton<String>(
                                   value:
                                       _tagType, // Afficher la valeur sélectionnée
+                                  isExpanded: true,
                                   items: [
                                     DropdownMenuItem<String>(
                                       value: _tagType, // La valeur affichée
@@ -315,15 +319,15 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                "Nb Joueurs Min",
+                                "Joueurs Min",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.black, // Couleur du texte
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Container(
-                                width: 150,
+                                width: 120,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
@@ -333,6 +337,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                                 child: DropdownButton<String>(
                                   value:
                                       _tagNbJoueursMin, // Afficher la valeur sélectionnée
+                                  isExpanded: true,
                                   items: [
                                     DropdownMenuItem<String>(
                                       value:
@@ -357,15 +362,15 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                "Nb Joueurs Max",
+                                "Joueurs Max",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.black, // Couleur du texte
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Container(
-                                width: 150,
+                                width: 120,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
@@ -375,10 +380,12 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                                 child: DropdownButton<String>(
                                   value:
                                       _tagNbJoueursMax, // Afficher la valeur sélectionnée
+                                  isExpanded: true,
                                   items: [
                                     DropdownMenuItem<String>(
                                       value:
                                           _tagNbJoueursMax, // La valeur affichée
+
                                       child: Text(
                                           _tagNbJoueursMax), // Afficher uniquement la valeur sélectionnée
                                     ),
@@ -409,13 +416,13 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                               const Text(
                                 "Etat",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.black, // Couleur du texte
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Container(
-                                width: 150,
+                                width: 120,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
@@ -425,6 +432,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                                 child: DropdownButton<String>(
                                   value:
                                       _tagEtat, // Afficher la valeur sélectionnée
+                                  isExpanded: true,
                                   items: [
                                     DropdownMenuItem<String>(
                                       value: _tagEtat, // La valeur affichée
@@ -446,15 +454,15 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                "Durée Minimale",
+                                "Durée Min",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.black, // Couleur du texte
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Container(
-                                width: 150,
+                                width: 120,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
@@ -464,6 +472,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                                 child: DropdownButton<String>(
                                   value:
                                       _tagDureeMin, // Afficher la valeur sélectionnée
+                                  isExpanded: true,
                                   items: [
                                     DropdownMenuItem<String>(
                                       value: _tagDureeMin, // La valeur affichée
@@ -485,15 +494,15 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                "Durée maximale",
+                                "Durée Max",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.black, // Couleur du texte
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Container(
-                                width: 150,
+                                width: 120,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
@@ -503,6 +512,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                                 child: DropdownButton<String>(
                                   value:
                                       _tagDureeMax, // Afficher la valeur sélectionnée
+                                  isExpanded: true,
                                   items: [
                                     DropdownMenuItem<String>(
                                       value: _tagDureeMax, // La valeur affichée
@@ -534,13 +544,13 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                               const Text(
                                 "Univers 1",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.black, // Couleur du texte
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Container(
-                                width: 150,
+                                width: 120,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
@@ -550,6 +560,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                                 child: DropdownButton<String>(
                                   value:
                                       _tagUnivers1, // Afficher la valeur sélectionnée
+                                  isExpanded: true,
                                   items: [
                                     DropdownMenuItem<String>(
                                       value: _tagUnivers1, // La valeur affichée
@@ -573,13 +584,13 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                               const Text(
                                 "Univers 2",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.black, // Couleur du texte
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Container(
-                                width: 150,
+                                width: 120,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
@@ -589,6 +600,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                                 child: DropdownButton<String>(
                                   value:
                                       _tagUnivers2, // Afficher la valeur sélectionnée
+                                  isExpanded: true,
                                   items: [
                                     DropdownMenuItem<String>(
                                       value: _tagUnivers2, // La valeur affichée
@@ -612,13 +624,13 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                               const Text(
                                 "Univers 3",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.black, // Couleur du texte
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Container(
-                                width: 150,
+                                width: 120,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
@@ -628,6 +640,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                                 child: DropdownButton<String>(
                                   value:
                                       _tagUnivers3, // Afficher la valeur sélectionnée
+                                  isExpanded: true,
                                   items: [
                                     DropdownMenuItem<String>(
                                       value: _tagUnivers3, // La valeur affichée
@@ -665,7 +678,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -697,7 +710,7 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
