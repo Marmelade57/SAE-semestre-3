@@ -729,47 +729,45 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      print("Le jeu a été supprimé.");
+                      print("L'actu a été supprimée.");
                     },
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.red[800], // Couleur de fond vert
-                      foregroundColor: Colors.white, // Couleur du texte blanche
+                      backgroundColor: Colors.red[800],
+                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(5), // Pas de coins arrondis
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 16.0,
-                          horizontal: 40.0), // Espacement interne
+                          vertical: 12.0,
+                          horizontal: 20.0), // Réduction du padding
                     ),
                     child: const Text(
                       "Supprimer",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 18, // Réduction de la taille de la police
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
+                  const SizedBox(width: 16), // Espace entre les boutons
                   ElevatedButton(
                     onPressed: () {
-                      print("Le jeu a été sauvegardé.");
+                      print("L'actu a été sauvegardée.");
                     },
                     style: TextButton.styleFrom(
-                      backgroundColor:
-                          Colors.green[700], // Couleur de fond vert
-                      foregroundColor: Colors.white, // Couleur du texte blanche
+                      backgroundColor: Colors.green[700],
+                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(5), // Pas de coins arrondis
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 16.0,
-                          horizontal: 40.0), // Espacement interne
+                          vertical: 12.0,
+                          horizontal: 20.0), // Réduction du padding
                     ),
                     child: const Text(
                       "Sauvegarder",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 18, // Réduction de la taille de la police
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -779,24 +777,6 @@ class _PageAdminModifJeuState extends State<PageAdminModifJeu> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildCarteTag(String nomTag) {
-    return Container(
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Text(
-            nomTag,
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }

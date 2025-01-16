@@ -20,8 +20,7 @@ class _PageAdminModifActualiteState extends State<PageAdminModifActualite> {
   TextEditingController titreController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
-  get screenWidth => null;
-
+  @override
   void initState() {
     super.initState();
     titreController.text = _displayTitre;
@@ -40,7 +39,7 @@ class _PageAdminModifActualiteState extends State<PageAdminModifActualite> {
           child: Column(
             children: [
               Container(
-                width: screenWidth,
+                width: MediaQuery.of(context).size.width * 0.9,
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -50,11 +49,8 @@ class _PageAdminModifActualiteState extends State<PageAdminModifActualite> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Première ligne : Texte aligné à gauche
                     const Text("Titre", style: TextStyle(fontSize: 18)),
                     const SizedBox(height: 16),
-
-                    // Deuxième ligne : Zone de texte
                     Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
@@ -78,7 +74,6 @@ class _PageAdminModifActualiteState extends State<PageAdminModifActualite> {
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
-
                     const SizedBox(height: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -87,20 +82,17 @@ class _PageAdminModifActualiteState extends State<PageAdminModifActualite> {
                         color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: Colors.grey[400]!, // Couleur de la bordure
-                          width: 0.0, // Épaisseur de la bordure
+                          color: Colors.grey[400]!,
+                          width: 0.0,
                         ),
                       ),
-                      child: Align(
-                        child: TextField(
-                          controller: descriptionController,
-                          maxLines:
-                              null, // Permet au texte de s'étendre et de revenir à la ligne
-                          minLines: 1, // Nombre minimal de lignes
-                          decoration: const InputDecoration(
-                            hintText: "",
-                            border: InputBorder.none,
-                          ),
+                      child: TextField(
+                        controller: descriptionController,
+                        maxLines: null,
+                        minLines: 1,
+                        decoration: const InputDecoration(
+                          hintText: "",
+                          border: InputBorder.none,
                         ),
                       ),
                     ),
@@ -113,14 +105,13 @@ class _PageAdminModifActualiteState extends State<PageAdminModifActualite> {
                   print("Modification de l'image");
                 },
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.grey[900], // Couleur de fond noire
-                  foregroundColor: Colors.white, // Couleur du texte blanche
+                  backgroundColor: Colors.grey[900],
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(5), // Pas de coins arrondis
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   padding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 32.0), // Espacement interne
+                      vertical: 16.0, horizontal: 32.0),
                 ),
                 child: const Text(
                   "Changer l'image",
@@ -134,261 +125,143 @@ class _PageAdminModifActualiteState extends State<PageAdminModifActualite> {
               Text(
                 _displayNomImage,
                 style: const TextStyle(
-                  fontSize: 16, // Taille de la police
-                  color: Colors.black, // Couleur du texte
+                  fontSize: 16,
+                  color: Colors.black,
                 ),
               ),
               const SizedBox(height: 48),
               const Text(
                 'Jeux concernés',
                 style: TextStyle(
-                  fontSize: 28, // Taille de la police
-                  fontWeight: FontWeight.bold, // Police en gras
-                  color: Colors.black, // Couleur du texte
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
               const Divider(),
               const SizedBox(height: 24),
               Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // Espacement égal entre les colonnes
-                    children: [
-                      // Première colonne
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  for (var i = 1; i <= 4; i++) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 32.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Jeu n°1",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors
-                                  .black, // Changement de couleur du texte
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: 400,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: DropdownButton<String>(
-                              value: _jeu1, // Afficher la valeur sélectionnée
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: _jeu1, // La valeur affichée
-                                  child: Text(
-                                      _jeu1), // Afficher uniquement la valeur sélectionnée
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Jeu n°$i",
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
                                 ),
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _jeu1 = value ??
-                                      _jeu1; // Mise à jour de la valeur sélectionnée
-                                });
-                              },
-                            ),
+                              ),
+                              const SizedBox(height: 8),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: DropdownButton<String>(
+                                  value: i == 1
+                                      ? _jeu1
+                                      : i == 2
+                                          ? _jeu2
+                                          : i == 3
+                                              ? _jeu3
+                                              : _jeu4,
+                                  items: [
+                                    DropdownMenuItem<String>(
+                                      value: i == 1
+                                          ? _jeu1
+                                          : i == 2
+                                              ? _jeu2
+                                              : i == 3
+                                                  ? _jeu3
+                                                  : _jeu4,
+                                      child: Text(i == 1
+                                          ? _jeu1
+                                          : i == 2
+                                              ? _jeu2
+                                              : i == 3
+                                                  ? _jeu3
+                                                  : _jeu4),
+                                    ),
+                                  ],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      if (i == 1) {
+                                        _jeu1 = value ?? _jeu1;
+                                      } else if (i == 2) {
+                                        _jeu2 = value ?? _jeu2;
+                                      } else if (i == 3) {
+                                        _jeu3 = value ?? _jeu3;
+                                      } else {
+                                        _jeu4 = value ?? _jeu4;
+                                      }
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 32),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // Espacement égal entre les colonnes
-                    children: [
-                      // Première colonne
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Jeu n°2",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors
-                                  .black, // Changement de couleur du texte
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: 400,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: DropdownButton<String>(
-                              value: _jeu2, // Afficher la valeur sélectionnée
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: _jeu2, // La valeur affichée
-                                  child: Text(
-                                      _jeu2), // Afficher uniquement la valeur sélectionnée
-                                ),
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _jeu2 = value ??
-                                      _jeu2; // Mise à jour de la valeur sélectionnée
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 32),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // Espacement égal entre les colonnes
-                    children: [
-                      // Première colonne
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Jeu n°3",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors
-                                  .black, // Changement de couleur du texte
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: 400,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: DropdownButton<String>(
-                              value: _jeu3, // Afficher la valeur sélectionnée
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: _jeu3, // La valeur affichée
-                                  child: Text(
-                                      _jeu3), // Afficher uniquement la valeur sélectionnée
-                                ),
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _jeu3 = value ??
-                                      _jeu3; // Mise à jour de la valeur sélectionnée
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 32),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // Espacement égal entre les colonnes
-                    children: [
-                      // Première colonne
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Jeu n°4",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors
-                                  .black, // Changement de couleur du texte
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: 400,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: DropdownButton<String>(
-                              value: _jeu4, // Afficher la valeur sélectionnée
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: _jeu4, // La valeur affichée
-                                  child: Text(
-                                      _jeu4), // Afficher uniquement la valeur sélectionnée
-                                ),
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _jeu4 = value ??
-                                      _jeu4; // Mise à jour de la valeur sélectionnée
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 32),
+                    ),
+                  ]
                 ],
               ),
               const SizedBox(height: 48),
               Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .spaceBetween, // Espace entre les deux boutons
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // Ajout d'un espace entre les boutons
                   ElevatedButton(
                     onPressed: () {
                       print("Le jeu a été supprimé.");
                     },
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.red[800], // Couleur de fond vert
-                      foregroundColor: Colors.white, // Couleur du texte blanche
+                      backgroundColor: Colors.red[800],
+                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(5), // Pas de coins arrondis
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 16.0,
-                          horizontal: 40.0), // Espacement interne
+                          vertical: 12.0,
+                          horizontal: 20.0), // Réduction du padding
                     ),
                     child: const Text(
                       "Supprimer",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 18, // Réduction de la taille de la police
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
+                  const SizedBox(width: 16), // Espace entre les boutons
                   ElevatedButton(
                     onPressed: () {
                       print("Le jeu a été sauvegardé.");
                     },
                     style: TextButton.styleFrom(
-                      backgroundColor:
-                          Colors.green[700], // Couleur de fond vert
-                      foregroundColor: Colors.white, // Couleur du texte blanche
+                      backgroundColor: Colors.green[700],
+                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(5), // Pas de coins arrondis
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 16.0,
-                          horizontal: 40.0), // Espacement interne
+                          vertical: 12.0,
+                          horizontal: 20.0), // Réduction du padding
                     ),
                     child: const Text(
                       "Sauvegarder",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 18, // Réduction de la taille de la police
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -398,25 +271,6 @@ class _PageAdminModifActualiteState extends State<PageAdminModifActualite> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildCarteTag(String nomTag) {
-    return Container(
-      padding: const EdgeInsets.all(4),
-      margin: const EdgeInsets.only(right: 20, left: 20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Text(
-            nomTag,
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }

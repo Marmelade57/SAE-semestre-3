@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../modele/dao.class.dart';
-import 'package:video_player/video_player.dart';
 
 DAO dao = DAO();
 
@@ -48,8 +48,6 @@ class PageJeu extends StatelessWidget {
   // Widget pour afficher les détails du jeu
   Widget _afficherDetailsJeu(
       BuildContext context, Map<String, dynamic> gameInfo) {
-    List<String> tags =
-        gameInfo['tags'] != null ? List<String>.from(gameInfo['tags']) : [];
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -68,8 +66,6 @@ class PageJeu extends StatelessWidget {
             children: [
               _titreDesc("Description"),
               const SizedBox(height: 16),
-              _afficherTags(tags),
-              const SizedBox(height: 16),
               _contenuDesc(
                   gameInfo['desc_jeu'] ?? "Aucune description disponible."),
             ],
@@ -81,7 +77,7 @@ class PageJeu extends StatelessWidget {
 
   // Widget pour le nom et la photo du jeu
   Widget _nomEtPhotoJeu(BuildContext context, Map<String, dynamic> gameInfo) {
-    int idJeu = gameInfo['id_jeu'];
+    String titre = gameInfo['titre_jeu'];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -94,7 +90,7 @@ class PageJeu extends StatelessWidget {
           ),
           child: gameInfo['image'] != null
               ? Image.network(gameInfo['image'], fit: BoxFit.cover)
-              : Image.asset("assets/images/jeux/$idJeu.png"),
+              : Image.asset("assets/images/jeux/$titre.png"),
         ),
         const SizedBox(height: 16),
         Container(
@@ -143,7 +139,23 @@ class PageJeu extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(Icons.play_circle, size: 64),
+          child: InkWell(
+            onTap: () {
+              // Ouvrir l'URL dans un navigateur ou une autre action ici
+              launch(
+                  url); // Assurez-vous d'avoir importé le package 'url_launcher'
+            },
+            child: Center(
+              child: Text(
+                "Voir la vidéo",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -184,21 +196,4 @@ class PageJeu extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _afficherTags(List<String> tags) {
-  if (tags.isEmpty) {
-    return const Text("Aucun tag disponible.");
-  }
-
-  return Wrap(
-    spacing: 8.0,
-    runSpacing: 4.0,
-    children: tags.map((tag) {
-      return Chip(
-        label: Text(tag),
-        backgroundColor: Colors.blueAccent.shade100,
-      );
-    }).toList(),
-  );
 }

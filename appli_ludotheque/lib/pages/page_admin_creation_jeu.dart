@@ -46,11 +46,8 @@ class _PageAdminCreationJeuState extends State<PageAdminCreationJeu> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Première ligne : Texte aligné à gauche
                     const Text("Titre", style: TextStyle(fontSize: 18)),
                     const SizedBox(height: 16),
-
-                    // Deuxième ligne : Zone de texte
                     Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
@@ -75,14 +72,13 @@ class _PageAdminCreationJeuState extends State<PageAdminCreationJeu> {
                   print("Choix d'une image");
                 },
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.grey[900], // Couleur de fond noire
-                  foregroundColor: Colors.white, // Couleur du texte blanche
+                  backgroundColor: Colors.grey[900],
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(5), // Pas de coins arrondis
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   padding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 32.0), // Espacement interne
+                      vertical: 16.0, horizontal: 32.0),
                 ),
                 child: const Text(
                   "Choisir image",
@@ -96,9 +92,9 @@ class _PageAdminCreationJeuState extends State<PageAdminCreationJeu> {
               const Text(
                 'Liste des Tags',
                 style: TextStyle(
-                  fontSize: 28, // Taille de la police
-                  fontWeight: FontWeight.bold, // Police en gras
-                  color: Colors.black, // Couleur du texte
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
               const Divider(),
@@ -106,522 +102,103 @@ class _PageAdminCreationJeuState extends State<PageAdminCreationJeu> {
               Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceBetween, // Espacement égal entre les colonnes
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Première colonne
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Difficulté",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors
-                                  .black, // Changement de couleur du texte
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: 150,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: DropdownButton<String>(
-                              value:
-                                  _tagDifficulte, // Afficher la valeur sélectionnée
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: _tagDifficulte, // La valeur affichée
-                                  child: Text(
-                                      _tagDifficulte), // Afficher uniquement la valeur sélectionnée
-                                ),
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _tagDifficulte = value ??
-                                      _tagDifficulte; // Mise à jour de la valeur sélectionnée
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // Deuxième colonne
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Âge minimal",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors
-                                  .black, // Changement de couleur du texte
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: 150,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: DropdownButton<String>(
-                              value:
-                                  _tagAgeMin, // Afficher la valeur sélectionnée
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: _tagAgeMin, // La valeur affichée
-                                  child: Text(
-                                      _tagAgeMin), // Afficher uniquement la valeur sélectionnée
-                                ),
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _tagAgeMin = value ??
-                                      _tagAgeMin; // Mise à jour de la valeur sélectionnée
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // Troisième colonne
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Âge maximal",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors
-                                  .black, // Changement de couleur du texte
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            width: 150,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: DropdownButton<String>(
-                              value:
-                                  _tagAgeMax, // Afficher la valeur sélectionnée
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: _tagAgeMax, // La valeur affichée
-                                  child: Text(
-                                      _tagAgeMax), // Afficher uniquement la valeur sélectionnée
-                                ),
-                              ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _tagAgeMax = value ??
-                                      _tagAgeMax; // Mise à jour de la valeur sélectionnée
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                      _buildDropdownColumn("Difficulté", _tagDifficulte,
+                          (value) {
+                        setState(() {
+                          _tagDifficulte = value ?? _tagDifficulte;
+                        });
+                      }),
+                      _buildDropdownColumn("Âge minimal", _tagAgeMin, (value) {
+                        setState(() {
+                          _tagAgeMin = value ?? _tagAgeMin;
+                        });
+                      }),
                     ],
                   ),
-                  Column(
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const SizedBox(height: 32),
-                      // Première ligne de colonnes
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .spaceBetween, // Espacement égal entre les colonnes
-                        children: [
-                          // Première colonne
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Type",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black, // Couleur du texte
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                width: 150,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: DropdownButton<String>(
-                                  value:
-                                      _tagType, // Afficher la valeur sélectionnée
-                                  items: [
-                                    DropdownMenuItem<String>(
-                                      value: _tagType, // La valeur affichée
-                                      child: Text(
-                                          _tagType), // Afficher uniquement la valeur sélectionnée
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _tagType = value ??
-                                          _tagType; // Mise à jour de la valeur sélectionnée
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          // Deuxième colonne
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Nb Joueurs Min",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black, // Couleur du texte
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                width: 150,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: DropdownButton<String>(
-                                  value:
-                                      _tagNbJoueursMin, // Afficher la valeur sélectionnée
-                                  items: [
-                                    DropdownMenuItem<String>(
-                                      value:
-                                          _tagNbJoueursMin, // La valeur affichée
-                                      child: Text(
-                                          _tagNbJoueursMin), // Afficher uniquement la valeur sélectionnée
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _tagNbJoueursMin = value ??
-                                          _tagNbJoueursMin; // Mise à jour de la valeur sélectionnée
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          // Troisième colonne
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Nb Joueurs Max",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black, // Couleur du texte
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                width: 150,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: DropdownButton<String>(
-                                  value:
-                                      _tagNbJoueursMax, // Afficher la valeur sélectionnée
-                                  items: [
-                                    DropdownMenuItem<String>(
-                                      value:
-                                          _tagNbJoueursMax, // La valeur affichée
-                                      child: Text(
-                                          _tagNbJoueursMax), // Afficher uniquement la valeur sélectionnée
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _tagNbJoueursMax = value ??
-                                          _tagNbJoueursMax; // Mise à jour de la valeur sélectionnée
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 32),
-
-                      // Deuxième ligne de colonnes (répétée de manière identique)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .spaceBetween, // Espacement égal entre les colonnes
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Etat",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black, // Couleur du texte
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                width: 150,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: DropdownButton<String>(
-                                  value:
-                                      _tagEtat, // Afficher la valeur sélectionnée
-                                  items: [
-                                    DropdownMenuItem<String>(
-                                      value: _tagEtat, // La valeur affichée
-                                      child: Text(
-                                          _tagEtat), // Afficher uniquement la valeur sélectionnée
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _tagEtat = value ??
-                                          _tagEtat; // Mise à jour de la valeur sélectionnée
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Durée Minimale",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black, // Couleur du texte
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                width: 150,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: DropdownButton<String>(
-                                  value:
-                                      _tagDureeMin, // Afficher la valeur sélectionnée
-                                  items: [
-                                    DropdownMenuItem<String>(
-                                      value: _tagDureeMin, // La valeur affichée
-                                      child: Text(
-                                          _tagDureeMin), // Afficher uniquement la valeur sélectionnée
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _tagDureeMin = value ??
-                                          _tagDureeMin; // Mise à jour de la valeur sélectionnée
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Durée maximale",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black, // Couleur du texte
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                width: 150,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: DropdownButton<String>(
-                                  value:
-                                      _tagDureeMax, // Afficher la valeur sélectionnée
-                                  items: [
-                                    DropdownMenuItem<String>(
-                                      value: _tagDureeMax, // La valeur affichée
-                                      child: Text(
-                                          _tagDureeMax), // Afficher uniquement la valeur sélectionnée
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _tagDureeMax = value ??
-                                          _tagDureeMax; // Mise à jour de la valeur sélectionnée
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 32),
-                      // Troisième ligne de colonnes (répétée de manière identique)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .spaceBetween, // Espacement égal entre les colonnes
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Univers 1",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black, // Couleur du texte
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                width: 150,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: DropdownButton<String>(
-                                  value:
-                                      _tagUnivers1, // Afficher la valeur sélectionnée
-                                  items: [
-                                    DropdownMenuItem<String>(
-                                      value: _tagUnivers1, // La valeur affichée
-                                      child: Text(
-                                          _tagUnivers1), // Afficher uniquement la valeur sélectionnée
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _tagUnivers1 = value ??
-                                          _tagUnivers1; // Mise à jour de la valeur sélectionnée
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Univers 2",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black, // Couleur du texte
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                width: 150,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: DropdownButton<String>(
-                                  value:
-                                      _tagUnivers2, // Afficher la valeur sélectionnée
-                                  items: [
-                                    DropdownMenuItem<String>(
-                                      value: _tagUnivers2, // La valeur affichée
-                                      child: Text(
-                                          _tagUnivers2), // Afficher uniquement la valeur sélectionnée
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _tagUnivers2 = value ??
-                                          _tagUnivers2; // Mise à jour de la valeur sélectionnée
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Univers 3",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black, // Couleur du texte
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                width: 150,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: DropdownButton<String>(
-                                  value:
-                                      _tagUnivers3, // Afficher la valeur sélectionnée
-                                  items: [
-                                    DropdownMenuItem<String>(
-                                      value: _tagUnivers3, // La valeur affichée
-                                      child: Text(
-                                          _tagUnivers3), // Afficher uniquement la valeur sélectionnée
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _tagUnivers3 = value ??
-                                          _tagUnivers3; // Mise à jour de la valeur sélectionnée
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      _buildDropdownColumn("Type", _tagType, (value) {
+                        setState(() {
+                          _tagType = value ?? _tagType;
+                        });
+                      }),
+                      _buildDropdownColumn("Nb Joueurs Min", _tagNbJoueursMin,
+                          (value) {
+                        setState(() {
+                          _tagNbJoueursMin = value ?? _tagNbJoueursMin;
+                        });
+                      }),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildDropdownColumn("Nb Joueurs Max", _tagNbJoueursMax,
+                          (value) {
+                        setState(() {
+                          _tagNbJoueursMax = value ?? _tagNbJoueursMax;
+                        });
+                      }),
+                      _buildDropdownColumn("Âge maximal", _tagAgeMax, (value) {
+                        setState(() {
+                          _tagAgeMax = value ?? _tagAgeMax;
+                        });
+                      }),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildDropdownColumn("Durée minimale", _tagDureeMin,
+                          (value) {
+                        setState(() {
+                          _tagDureeMin = value ?? _tagDureeMin;
+                        });
+                      }),
+                      _buildDropdownColumn("Durée maximale", _tagDureeMax,
+                          (value) {
+                        setState(() {
+                          _tagDureeMax = value ?? _tagDureeMax;
+                        });
+                      }),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildDropdownColumn("État", _tagEtat, (value) {
+                        setState(() {
+                          _tagEtat = value ?? _tagEtat;
+                        });
+                      }),
+                      _buildDropdownColumn("Univers 1", _tagUnivers1, (value) {
+                        setState(() {
+                          _tagUnivers1 = value ?? _tagUnivers1;
+                        });
+                      }),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildDropdownColumn("Univers 2", _tagUnivers2, (value) {
+                        setState(() {
+                          _tagUnivers2 = value ?? _tagUnivers2;
+                        });
+                      }),
+                      _buildDropdownColumn("Univers 3", _tagUnivers3, (value) {
+                        setState(() {
+                          _tagUnivers3 = value ?? _tagUnivers3;
+                        });
+                      }),
                     ],
                   ),
                 ],
@@ -629,86 +206,22 @@ class _PageAdminCreationJeuState extends State<PageAdminCreationJeu> {
               const SizedBox(height: 32),
               const Divider(),
               const SizedBox(height: 32),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Lien YouTube',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold, // Police en gras
-                    color: Colors.black, // Couleur du texte
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: Colors.grey[400]!, // Couleur de la bordure
-                    width: 0.0, // Épaisseur de la bordure
-                  ),
-                ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    hintText: "Entrez le lien",
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
+              _buildTextFieldSection("Lien YouTube", "Entrez le lien"),
               const SizedBox(height: 48),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Description',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold, // Police en gras
-                    color: Colors.black, // Couleur du texte
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: Colors.grey[400]!, // Couleur de la bordure
-                    width: 0.0, // Épaisseur de la bordure
-                  ),
-                ),
-                child: const Align(
-                  child: TextField(
-                    maxLines:
-                        null, // Permet au texte de s'étendre et de revenir à la ligne
-                    minLines: 1, // Nombre minimal de lignes
-                    decoration: InputDecoration(
-                      hintText: "",
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
+              _buildTextFieldSection("Description", ""),
               const SizedBox(height: 48),
               ElevatedButton(
                 onPressed: () {
                   print("Ajout d'un jeu");
                 },
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.green[700], // Couleur de fond vert
-                  foregroundColor: Colors.white, // Couleur du texte blanche
+                  backgroundColor: Colors.green[700],
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(5), // Pas de coins arrondis
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   padding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 40.0), // Espacement interne
+                      vertical: 16.0, horizontal: 40.0),
                 ),
                 child: const Text(
                   "Ajouter",
@@ -725,21 +238,72 @@ class _PageAdminCreationJeuState extends State<PageAdminCreationJeu> {
     );
   }
 
-  Widget _buildCarteTag(String nomTag) {
-    return Container(
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Text(
-            nomTag,
-            textAlign: TextAlign.center,
+  Widget _buildDropdownColumn(
+      String label, String value, Function(String?) onChanged) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.black,
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          width: 150,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: DropdownButton<String>(
+            value: value,
+            items: [
+              DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              ),
+            ],
+            onChanged: onChanged,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTextFieldSection(String title, String hintText) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: Colors.grey[400]!,
+              width: 0.0,
+            ),
+          ),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: hintText,
+              border: InputBorder.none,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

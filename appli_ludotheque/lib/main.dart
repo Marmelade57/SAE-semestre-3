@@ -2,7 +2,6 @@ import 'package:appli_ludotheque/pages/page_erreur.dart';
 import 'package:flutter/material.dart';
 import 'pages/page_accueil.dart';
 import 'pages/page_jeu.dart';
-import 'pages/page_resultat_recherche.dart';
 import 'pages/page_actualites.dart';
 import 'pages/page_actualite.dart';
 import 'pages/page_presentation.dart';
@@ -26,7 +25,6 @@ class MyApp extends StatelessWidget {
     const creme = Color.fromARGB(255, 242, 228, 201);
     const noir1 = Color.fromARGB(255, 13, 26, 38);
     const rouge = Color.fromARGB(255, 191, 65, 36);
-    const bleu = Color.fromARGB(255, 52, 166, 191);
     return MaterialApp(
       title: 'Ludothèque', // possibilité de faire un thème nuit
       theme: ThemeData(
@@ -74,7 +72,6 @@ class MyApp extends StatelessWidget {
       routes: {
         "/accueil": (context) => const PageAccueil(),
         "/jeu": (context) => const PageJeu(),
-        "/recherche": (context) => const PageResultatRecherche(),
         "/actualites": (context) => const PageActualites(),
         "/actu": (context) => const PageActualite(),
         "/apropos": (context) => const PagePresentation(),

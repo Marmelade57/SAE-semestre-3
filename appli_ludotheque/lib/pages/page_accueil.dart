@@ -3,22 +3,76 @@ import '../modele/dao.class.dart';
 
 DAO dao = DAO();
 
-class PageAccueil extends StatelessWidget {
+class PageAccueil extends StatefulWidget {
   const PageAccueil({super.key});
 
-  Future<List<String>> _getAllTitles(DAO dao) async {
-    List<Map<String, dynamic>> data = await dao.getAll("JEU");
-    List<String> titles =
-        data.map((item) => item['titre_jeu'] as String).toList();
+  @override
+  _PageAccueilState createState() => _PageAccueilState();
+}
 
-    return titles;
+class _PageAccueilState extends State<PageAccueil> {
+  TextEditingController _searchController = TextEditingController();
+  List<Map<String, dynamic>> _allTitles = [];
+  List<Map<String, dynamic>> _filteredTitles = [];
+
+  Future<void> _getAllTitles(DAO dao) async {
+    List<Map<String, dynamic>> data = await dao.getAll("JEU");
+    List<Map<String, dynamic>> titles = data
+        .asMap()
+        .entries
+        .map((entry) => {
+              'index': entry.key + 1, // L'index d'origine (1-based)
+              'title': entry.value['titre_jeu']
+            })
+        .toList();
+    setState(() {
+      _allTitles = titles;
+      _filteredTitles = titles; // Initialement, tous les titres sont affichés
+    });
+  }
+
+  void _showFilterDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Filtrer les jeux"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Fermer la boîte de dialogue
+              },
+              child: const Text("Annuler"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _filterTitles(String query) {
+    setState(() {
+      _filteredTitles = _allTitles
+          .where((item) =>
+              item['title'].toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getAllTitles(dao);
+    _searchController.addListener(() {
+      _filterTitles(_searchController.text);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Accueil"),
+        title: const Text("Accueil"),
         leading: Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.menu),
@@ -29,25 +83,34 @@ class PageAccueil extends StatelessWidget {
       drawer: Drawer(
         child: _contenuMenu(context),
       ),
-      body: FutureBuilder<List<String>>(
-        future: _getAllTitles(dao),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            // Afficher un indicateur de chargement pendant que les données sont récupérées
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            // Afficher un message d'erreur si la récupération échoue
-            return Center(child: Text("Erreur : ${snapshot.error}"));
-          } else if (snapshot.hasData) {
-            // Utiliser les titres récupérés pour générer les cartes
-            List<String> titles = snapshot.data!;
-
-            return SingleChildScrollView(
+      body: _filteredTitles.isEmpty
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        hintText: "Rechercher un jeu...",
+                        prefixIcon: const Icon(
+                            Icons.search), // Icône de recherche à gauche
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.filter_alt),
+                          onPressed: () {
+                            // Ajoutez ici la logique pour ouvrir un menu ou une boîte de dialogue
+                            _showFilterDialog(context);
+                          },
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 20),
                     GridView.count(
                       crossAxisCount: 2,
@@ -55,25 +118,20 @@ class PageAccueil extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
-                      children: List.generate(titles.length, (index) {
+                      children: _filteredTitles.map((item) {
                         return GestureDetector(
                           onTap: () => Navigator.pushNamed(context, '/jeu',
-                              arguments: index + 1),
-                          child:
-                              _constructeurCarteJeu(index + 1, titles[index]),
+                              arguments:
+                                  item['index']), // Utilise l'index d'origine
+                          child: _constructeurCarteJeu(
+                              item['index'], item['title']),
                         );
-                      }),
+                      }).toList(),
                     ),
                   ],
                 ),
               ),
-            );
-          } else {
-            // Gestion d'un cas improbable sans données
-            return const Center(child: Text("Aucun élément disponible."));
-          }
-        },
-      ),
+            ),
     );
   }
 
@@ -87,7 +145,7 @@ class PageAccueil extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: Image.asset("assets/images/jeux/$index.png"),
+            child: Image.asset("assets/images/jeux/$titre.png"),
           ),
           Container(
             width: double.infinity,
@@ -99,14 +157,7 @@ class PageAccueil extends StatelessWidget {
                 bottomRight: Radius.circular(8),
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  titre,
-                ),
-              ],
-            ),
+            child: Text(titre),
           ),
         ],
       ),
@@ -121,9 +172,7 @@ class PageAccueil extends StatelessWidget {
           decoration: BoxDecoration(
               image:
                   DecorationImage(image: AssetImage("assets/images/logo.png"))),
-          child: Text(
-            '',
-          ),
+          child: Text(''),
         ),
         ListTile(
           leading: const Icon(Icons.home_outlined),

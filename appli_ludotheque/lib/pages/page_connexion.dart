@@ -9,6 +9,15 @@ class PageConnexion extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Connexion'),
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+      ),
+      drawer: Drawer(
+        child: _contenuMenu(context),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -93,10 +102,53 @@ class PageConnexion extends StatelessWidget {
   Widget _logoUrl(String cheminLogo, String url) {
     return IconButton(
       onPressed: () {
-        // ignore: deprecated_member_use
-        launch(url);
+        launchUrl(Uri.parse(url));
       },
       icon: Image.asset(cheminLogo),
+    );
+  }
+
+  // Menu du Drawer
+  Widget _contenuMenu(BuildContext context) {
+    return ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        const DrawerHeader(
+          decoration: BoxDecoration(
+              image:
+                  DecorationImage(image: AssetImage("assets/images/logo.png"))),
+          child: Text(''),
+        ),
+        ListTile(
+          leading: const Icon(Icons.home_outlined),
+          title: const Text('Accueil'),
+          onTap: () => Navigator.pop(context),
+        ),
+        ListTile(
+          leading: const Icon(Icons.newspaper_outlined),
+          title: const Text('Actualités'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/actualites');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.question_mark_outlined),
+          title: const Text('À propos'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/apropos');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.login),
+          title: const Text('Connexion'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/connexion');
+          },
+        ),
+      ],
     );
   }
 }
