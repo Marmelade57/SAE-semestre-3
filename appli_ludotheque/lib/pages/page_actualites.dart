@@ -122,7 +122,7 @@ class PageActualites extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: Image.asset("../images/jeux/$index.png"),
+            child: Image.asset("../images/actu/$index.png"),
           ),
           Container(
             width: double.infinity,
