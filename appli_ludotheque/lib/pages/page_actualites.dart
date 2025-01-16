@@ -73,7 +73,7 @@ class PageActualites extends StatelessWidget {
       children: [
         const DrawerHeader(
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage("../../images/logo.png")),
+            image: DecorationImage(image: AssetImage("assets/images/logo.png")),
           ),
           child: Text(
             '',
@@ -122,7 +122,7 @@ class PageActualites extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: Image.asset("../images/actu/$index.png"),
+            child: Image.asset("assets/images/actu/$index.png"),
           ),
           Container(
             width: double.infinity,

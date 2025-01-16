@@ -50,7 +50,7 @@ class PageResultatRecherche extends StatelessWidget {
         const DrawerHeader(
           decoration: BoxDecoration(
               image:
-                  DecorationImage(image: AssetImage("../../images/logo.png"))),
+                  DecorationImage(image: AssetImage("assets/images/logo.png"))),
           child: Text(
             '',
           ),

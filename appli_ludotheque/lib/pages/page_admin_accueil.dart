@@ -30,8 +30,8 @@ class _PageAdminAccueil extends State<PageAdminAccueil> {
               ),
               const Divider(),
               const SizedBox(height: 8),
-              _logoUrl(
-                  "../images/logo.png", "https://www.latableeonirique.com/"),
+              _logoUrl("assets/images/logo.png",
+                  "https://www.latableeonirique.com/"),
               const SizedBox(height: 48),
               _constructeurZoneBoutons(
                   "Ajouter à l'application",

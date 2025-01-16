@@ -59,7 +59,7 @@ class PageJeu extends StatelessWidget {
             children: [
               _nomEtPhotoJeu(context, gameInfo),
               const SizedBox(width: 16),
-              _videoJeu(context),
+              Expanded(child: _videoJeu(context, gameInfo['lien_youtube'])),
             ],
           ),
           const SizedBox(height: 32),
@@ -71,8 +71,7 @@ class PageJeu extends StatelessWidget {
               _afficherTags(tags),
               const SizedBox(height: 16),
               _contenuDesc(
-                  gameInfo['desc_jeu'] ?? "Aucune description disponible.",
-                  gameInfo['desc_jeu'].length),
+                  gameInfo['desc_jeu'] ?? "Aucune description disponible."),
             ],
           ),
         ],
@@ -87,20 +86,20 @@ class PageJeu extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 200,
-          width: 225,
+          height: 175,
+          width: 200,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
           child: gameInfo['image'] != null
               ? Image.network(gameInfo['image'], fit: BoxFit.cover)
-              : Image.asset("../images/jeux/$idJeu.png"),
+              : Image.asset("assets/images/jeux/$idJeu.png"),
         ),
         const SizedBox(height: 16),
         Container(
           padding: const EdgeInsets.all(16),
-          width: 225,
+          width: 200,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
@@ -118,7 +117,7 @@ class PageJeu extends StatelessWidget {
   }
 
   // Widget pour la vidéo explicative
-  Widget _videoJeu(BuildContext context) {
+  Widget _videoJeu(BuildContext context, String url) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -144,7 +143,7 @@ class PageJeu extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Icon(Icons.play_circle, size: 64),
+          child: Icon(Icons.play_circle, size: 64),
         ),
       ],
     );
@@ -169,9 +168,8 @@ class PageJeu extends StatelessWidget {
   }
 
   // Widget pour le contenu de la description
-  Widget _contenuDesc(String contenu, double taille) {
+  Widget _contenuDesc(String contenu) {
     return Container(
-      height: taille,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -180,6 +178,9 @@ class PageJeu extends StatelessWidget {
       child: Text(
         contenu,
         style: const TextStyle(fontSize: 24),
+        softWrap: true, // Le texte va se replier si nécessaire
+        overflow: TextOverflow
+            .fade, // En cas de trop grand texte, il ne débordera pas
       ),
     );
   }

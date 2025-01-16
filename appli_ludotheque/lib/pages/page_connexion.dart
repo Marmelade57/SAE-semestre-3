@@ -43,8 +43,8 @@ class PageConnexion extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              _logoUrl(
-                  "../images/logo.png", "https://www.latableeonirique.com/"),
+              _logoUrl("assets/images/logo.png",
+                  "https://www.latableeonirique.com/"),
             ],
           ),
         ),

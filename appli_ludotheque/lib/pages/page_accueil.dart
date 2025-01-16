@@ -87,7 +87,7 @@ class PageAccueil extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: Image.asset("../images/jeux/$index.png"),
+            child: Image.asset("assets/images/jeux/$index.png"),
           ),
           Container(
             width: double.infinity,
@@ -120,7 +120,7 @@ class PageAccueil extends StatelessWidget {
         const DrawerHeader(
           decoration: BoxDecoration(
               image:
-                  DecorationImage(image: AssetImage("../../images/logo.png"))),
+                  DecorationImage(image: AssetImage("assets/images/logo.png"))),
           child: Text(
             '',
           ),

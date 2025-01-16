@@ -59,10 +59,10 @@ class PagePresentation extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _logoUrl("../images/instagram.png",
+                          _logoUrl("assets/images/instagram.png",
                               "https://www.instagram.com/latableeonirique/"),
                           const SizedBox(width: 16),
-                          _logoUrl("../images/facebook.png",
+                          _logoUrl("assets/images/facebook.png",
                               "https://www.facebook.com/Latableeonirique/")
                         ],
                       ),
