@@ -163,6 +163,7 @@ Future<List<Jeu>> _filterJeuxByTags(String query) async {
 
   @override
   Widget build(BuildContext context) {
+    const couleur = Color.fromARGB(255, 13, 26, 38);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Accueil'),
@@ -188,11 +189,17 @@ Future<List<Jeu>> _filterJeuxByTags(String query) async {
                       decoration: const InputDecoration(
                         labelText: 'Effectuer la recherche...',
                         border: OutlineInputBorder(),
+                        labelStyle: TextStyle(
+                          color: couleur,
+                        ),
+                      ),
+                      style: TextStyle(
+                        color: couleur,
                       ),
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.filter_list),
+                    icon: const Icon(Icons.filter_list, color: couleur,),
                     onPressed: () => _showTagFilterDialog(context),
                   ),
                 ],
@@ -319,7 +326,7 @@ void _showTagSelectionDialog(BuildContext context, TypeTag typeTag) {
         } else if (snapshot.hasError) {
           return Center(child: Text('Erreur: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('Aucun jeu trouvé.'));
+          return const Center(child: Text('Aucun jeu trouvé.', style: TextStyle(color: Colors.white),));
         } else if (snapshot.hasData) {
 
           List<Jeu> filteredJeux = snapshot.data!;

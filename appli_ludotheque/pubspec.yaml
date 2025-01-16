@@ -40,6 +40,7 @@ dependencies:
   path: ^1.9.0
   sqflite: ^2.4.1
   url_launcher: ^6.3.1
+  file_picker: ^8.1.7
 
 dev_dependencies:
   flutter_test:
@@ -79,12 +80,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  #fonts:
-  #   - family: Plus Jakarta Sans
-  #     fonts:
-  #       - asset: fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf
-  #       - asset: fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Italic.ttf
-  #         style: italic
+  fonts:
+     - family: 
+       fonts:
+         - asset: fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf
+         - asset: fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Italic.ttf
+           style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

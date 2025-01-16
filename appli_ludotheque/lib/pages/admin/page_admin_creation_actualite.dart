@@ -97,7 +97,7 @@ class _PageAdminCreationActualiteState extends State<PageAdminCreationActualite>
 
               ElevatedButton(  
                   onPressed: (){
-                    print("Choix d'une image");
+                    print("Choix d'une image"); //utiliser le package file_picker
                   },
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.grey[900],  // Couleur de fond noire

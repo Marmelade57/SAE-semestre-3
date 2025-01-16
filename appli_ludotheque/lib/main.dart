@@ -22,34 +22,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const orange = Color.fromARGB(255, 242, 166, 99);
+    const creme = Color.fromARGB(255, 242, 228, 201);
+    const noir1 = Color.fromARGB(255, 13, 26, 38);
+    const rouge = Color.fromARGB(255, 191, 65, 36);
+    const bleu = Color.fromARGB(255, 52, 166, 191);
     return MaterialApp(
       title: 'Ludothèque', // possibilité de faire un thème nuit
       theme: ThemeData( // la police d'écriture est à changer dans pubspec.yaml
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.black,
-          primary: Colors.red,
-          onPrimary: Colors.pink,
+          primary: orange,
+          error: rouge,
+          onError: rouge,
+          /* onPrimary: Colors.pink,
           secondary: Colors.blue,
           onSecondary: Colors.blueGrey,
           tertiary: Colors.lime,
-          onTertiary: Colors.orange,
-          surface: Colors.grey, // fond quand le scaffold n'est pas défini
+          onTertiary: Colors.orange, */
+          surface: Colors.white, // fond quand le scaffold n'est pas défini. Exemple : filtre
           onSurface: Colors.black, // texte
           ),
           iconTheme: const IconThemeData(
-            color:  Color(0xFF000000),
+            color:  noir1,
           ),
           drawerTheme: const DrawerThemeData(
-            backgroundColor: Color.fromARGB(255, 242, 166, 99),
+            backgroundColor: orange,
             scrimColor: Color.fromARGB(128, 255, 255, 255),
           ),
           listTileTheme: ListTileThemeData(
-            iconColor: Color.fromARGB(255, 13, 26, 38),
-            textColor: Color.fromARGB(255, 13, 26, 38),
+            iconColor: noir1,
+            textColor: noir1,
           ),
           appBarTheme: const AppBarTheme(
-            color: Color.fromARGB(255, 242, 166, 99),// Color.fromARGB(255, 191, 65, 36), // là où il y a accueil et le menu
+            color:  orange, // là où il y a accueil et le menu
             elevation: 0,
             iconTheme: IconThemeData(
               color: Colors.white,
@@ -59,9 +66,8 @@ class MyApp extends StatelessWidget {
               fontSize: 20.0,
             ),
           ),
-          scaffoldBackgroundColor: Color.fromARGB(255, 242, 228, 201), // le vrai fond
-          textTheme: const TextTheme(),
-          bottomAppBarTheme: const BottomAppBarTheme(),
+          scaffoldBackgroundColor: creme, // le vrai fond
+          fontFamily: "Plus Jakarta Sans"
       ),
       debugShowCheckedModeBanner: false,
       routes: {
