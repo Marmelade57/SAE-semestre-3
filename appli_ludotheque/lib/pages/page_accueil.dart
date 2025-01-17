@@ -203,6 +203,14 @@ class _PageAccueilState extends State<PageAccueil> {
             Navigator.pushNamed(context, '/connexion');
           },
         ),
+        ListTile(
+          leading: const Icon(Icons.error),
+          title: const Text('Exemple erreur'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/erreur');
+          },
+        ),
       ],
     );
   }

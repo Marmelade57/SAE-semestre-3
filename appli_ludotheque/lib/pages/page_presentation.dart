@@ -69,12 +69,43 @@ class PagePresentation extends StatelessWidget {
                               "https://www.facebook.com/Latableeonirique/"),
                         ],
                       ),
+                      _constructeurBouton(
+                          context,
+                          "https://www.latableeonirique.com/contact/",
+                          "Remplir un formulaire",
+                          Color.fromARGB(255, 52, 166, 191)),
                     ],
                   ),
                 ],
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _constructeurBouton(
+      BuildContext context, String url, String texteBouton, Color couleurFond) {
+    return ElevatedButton(
+      onPressed: () {
+        launchUrl(Uri.parse(url));
+      },
+      style: TextButton.styleFrom(
+        backgroundColor: couleurFond,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        padding: const EdgeInsets.symmetric(
+          vertical: 16.0,
+          horizontal: 40.0, // Réduit pour s'adapter à l'écran
+        ),
+      ),
+      child: Text(
+        texteBouton,
+        style: const TextStyle(
+          fontSize: 20,
         ),
       ),
     );
@@ -167,7 +198,10 @@ class PagePresentation extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.home_outlined),
           title: const Text('Accueil'),
-          onTap: () => Navigator.pop(context),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/accueil');
+          },
         ),
         ListTile(
           leading: const Icon(Icons.newspaper_outlined),
@@ -180,10 +214,7 @@ class PagePresentation extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.question_mark_outlined),
           title: const Text('À propos'),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.pushNamed(context, '/apropos');
-          },
+          onTap: () => Navigator.pop(context),
         ),
         ListTile(
           leading: const Icon(Icons.login),
@@ -191,6 +222,14 @@ class PagePresentation extends StatelessWidget {
           onTap: () {
             Navigator.pop(context);
             Navigator.pushNamed(context, '/connexion');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.error),
+          title: const Text('Exemple erreur'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/erreur');
           },
         ),
       ],

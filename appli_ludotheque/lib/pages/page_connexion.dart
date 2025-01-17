@@ -178,7 +178,10 @@ class _PageConnexionState extends State<PageConnexion> {
         ListTile(
           leading: const Icon(Icons.home_outlined),
           title: const Text('Accueil'),
-          onTap: () => Navigator.pop(context),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/accueil');
+          },
         ),
         ListTile(
           leading: const Icon(Icons.newspaper_outlined),
@@ -199,9 +202,14 @@ class _PageConnexionState extends State<PageConnexion> {
         ListTile(
           leading: const Icon(Icons.login),
           title: const Text('Connexion'),
+          onTap: () => Navigator.pop(context),
+        ),
+        ListTile(
+          leading: const Icon(Icons.error),
+          title: const Text('Exemple erreur'),
           onTap: () {
             Navigator.pop(context);
-            Navigator.pushNamed(context, '/connexion');
+            Navigator.pushNamed(context, '/erreur');
           },
         ),
       ],
