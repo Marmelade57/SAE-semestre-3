@@ -1,16 +1,9 @@
-<style>
-    a{
-        color:#34a6bf;
-        text-decoration : solid underline 1px  #0d1a26;
-    }
-</style>
-
 <span style="font-size:40px; ">Bienvenue sur ce git !</span>
 
 # Quel est ce projet ?
 
 À l'occasion d'une Situation d'Apprentissage et d'Évaluation, un groupe de 5 étudiants ont eu pour but de réaliser une application mobile pour 
-l'association <a href="https://www.latableeonirique.com/">La Tablée Onirique</a>.
+l'association <a href="https://www.latableeonirique.com/" style="color:#34a6bf; text-decoration : solid underline 1px #0d1a26;">La Tablée Onirique</a>.
 
 ## Architecture du git
 Une partie de la documentation est disponible dans le dossier **Documents**.
@@ -50,4 +43,4 @@ Les étudiants ayant travaillé sur ce projet durant un semestre sont :
 - De Andrade Vincent,
 - Ait Bammou Zaïn.
 
-L'application a été demandée par l'association <a href="https://www.latableeonirique.com/">La Tablée Onirique</a>
+L'application a été demandée par l'association <a href="https://www.latableeonirique.com/" style="color:#34a6bf; text-decoration : solid underline 1px #0d1a26;">La Tablée Onirique</a>
