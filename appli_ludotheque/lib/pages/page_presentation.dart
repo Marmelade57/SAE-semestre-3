@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ---- NB : Ajouter lien vers les réseaux
 
@@ -10,6 +11,16 @@ class PagePresentation extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Présentation'),
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+      ),
+
+      drawer: Drawer(
+        child: _contenuMenu(context),
       ),
       
       body: SingleChildScrollView(
@@ -17,90 +28,64 @@ class PagePresentation extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-
+              //const SizedBox(height:32),
+              _constructeurZoneLongue(
+                "Qui sommes-nous ?",
+                "Après avoir formé un groupe de joueurs qui ne se connaissaient pas auparavant, l’équipe a rapidement compris que le jeu n’était pas seulement le point commun de leurs rencontres, mais également une excellente raison de partager des moments inoubliables. Ainsi est née l’idée de fonder la Tablée Onirique, avec pour ambition de rassembler les gens autour des divers aspects du jeu. \nNous organisons chaque année en été un festival nommé Le Festival Onirique, il s’agit d’une reconstitution de campement médiéval fantastique avec tentes médiévales au milieu duquel nous proposons différents pôles. \nNous faisons des activités Loups-Garous pour adulte (16 ans et +), des parties de Jeu de Rôle pour adultes, ados et enfants, des ateliers peinture sur figurine pour ados et adultes, et enfin des ateliers jeux de plateau sur le thème médiéval fantastique pour enfants, ados et adultes."
+              ),
               const SizedBox(height:32),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Text(
-                          "Qui sommes-nous ?", 
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-              
-                      const SizedBox(height: 16),
-                    ],
-                  ),
-                  
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 16),
-                  Container(
-                    height: 250,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit leo, mattis sed suscipit sit amet, dignissim non mi. Pellentesque accumsan et turpis eget dignissim. Suspendisse potenti. Donec elementum mollis molestie. Aenean et faucibus metus. Duis sit amet lorem enim. Maecenas viverra magna in magna volutpat, ac ultrices urna suscipit. Nam rutrum blandit tempus. Cras tempor tempor est, vel pharetra nisl consequat a. Nam ultrices tellus et aliquet imperdiet. Pellentesque tempus pharetra ipsum a tincidunt. Donec vehicula non sem cursus vestibulum. Praesent non sollicitudin urna. \n Nulla quis posuere metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis elementum nisi nec imperdiet suscipit. Suspendisse sit amet efficitur velit. Praesent rhoncus sagittis dui vel aliquam. Etiam ut eleifend dolor. Fusce tristique risus quis auctor hendrerit. Aliquam vehicula, lectus sed porta sollicitudin, nibh velit euismod odio, eget aliquet eros odio vel arcu. Aliquam vehicula dui interdum tincidunt sagittis. Sed cursus leo quis augue auctor posuere. Curabitur vel bibendum quam. Suspendisse ut sem sit amet nunc lobortis finibus. Sed maximus ullamcorper velit, at laoreet orci sodales vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi sagittis ullamcorper mi eu iaculis."
-                    ),
-                  )
-                ],
+              _constructeurZoneLongue(
+                "Nos objectifs", 
+                "- Dynamiser l’activité culturelle des alentours\n\n- Organiser des événements thématiques\n\n- Créer un lieu de partage\n\n- Impliquer les jeunes dans la vie associative\n\n- Promouvoir auprès du grand public les jeux modernes\n\n- Proposer une activité deux fois par mois"
               ),
 
               const SizedBox(height:64),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Text(
-                          "Notre objectif :", 
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-              
-                      const SizedBox(height: 16),
-                    ],
-                  ),
-                  
-              Column(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 16),
-                  Container(
-                    height: 250,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
+                  Text(
+                    'Nous contacter',
+                    style: TextStyle(
+                      fontSize: 28,
                     ),
-                    child: const Text(
-                      "Lorem ipsum dolor sit amet, Nah, I'd win, consectetur adipiscing elit. Donec velit leo, mattis sed suscipit sit amet, dignissim non mi. Pellentesque accumsan et turpis eget dignissim. Suspendisse potenti. Donec elementum mollis molestie. Aenean et faucibus metus. Duis sit amet lorem enim. Maecenas viverra magna in magna volutpat, ac ultrices urna suscipit. Nam rutrum blandit tempus. Cras tempor tempor est, vel pharetra nisl consequat a. Nam ultrices tellus et aliquet imperdiet. Pellentesque tempus pharetra ipsum a tincidunt. Donec vehicula non sem cursus vestibulum. Praesent non sollicitudin urna. \n Nulla quis posuere metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis elementum nisi nec imperdiet suscipit. Suspendisse sit amet efficitur velit. Praesent rhoncus sagittis dui vel aliquam. Etiam ut eleifend dolor. Fusce tristique risus quis auctor hendrerit. Aliquam vehicula, lectus sed porta sollicitudin, nibh velit euismod odio, eget aliquet eros odio vel arcu. Aliquam vehicula dui interdum tincidunt sagittis. Sed cursus leo quis augue auctor posuere. Curabitur vel bibendum quam. Suspendisse ut sem sit amet nunc lobortis finibus. Sed maximus ullamcorper velit, at laoreet orci sodales vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi sagittis ullamcorper mi eu iaculis."
-                    ),
-                  )
+                  ),
+                  SizedBox(height: 16),
                 ],
-              )
+              ),
+
+              const Divider(),
+
+              const SizedBox(height:16),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _constructeurZoneInfo("E-mail", "latableeonirique@gmail.com"),
+                  const SizedBox(height: 16),
+                  _constructeurZoneInfo("Adresse", "38 route nationale 57480 APACH"),
+                  const SizedBox(height: 16),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Réseaux',
+                        style: TextStyle(fontSize: 18),
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _logoUrl("../images/instagram.png","https://www.instagram.com/latableeonirique/"),                          
+                          const SizedBox(width: 16),
+                          _logoUrl("../images/facebook.png", "https://www.facebook.com/Latableeonirique/")
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -108,21 +93,118 @@ class PagePresentation extends StatelessWidget {
     );
   }
 
-  Widget _buildCarteTag(String nomTag){
-    return Container(
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Text(
-            nomTag,
-            textAlign: TextAlign.center,
+  Widget _constructeurZoneLongue(String titre, String contenu){
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                titre,
+                style: const TextStyle(fontSize: 28),
+                ),
+              const SizedBox(height: 16),
+            ],
+        ),
+        const Divider(),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 16),
+            Container(
+              height: 330,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(contenu),
+            )
+          ],
+        ),
+      ]
+    );
+  }
+
+  Widget _constructeurZoneInfo(String champ, String donnee){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          champ,
+          style: const TextStyle(fontSize: 18),
+        ),
+
+        const SizedBox(height: 8),
+        
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.grey),
           ),
-        ],
-      ),
+          child: Text(
+            donnee, 
+            style: const TextStyle(fontSize: 16)
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _logoUrl(String cheminLogo, String url){
+    return IconButton(
+      onPressed: () {
+        // ignore: deprecated_member_use
+        launch(url);
+      },
+      icon: Image.asset(cheminLogo, width: 40, height: 40),
+    );
+  }
+
+  Widget _contenuMenu(BuildContext context){
+    return ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        const DrawerHeader(
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage("../../images/logo.png"))
+          ),
+          child: Text(
+            '',
+          ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.home_outlined),
+          title: const Text('Accueil'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/accueil');
+          }
+        ),
+        ListTile(
+          leading: const Icon(Icons.newspaper_outlined),
+          title: const Text('Actualités'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/actualites');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.question_mark_outlined),
+          title: const Text('À propos'),
+          onTap: () => Navigator.pop(context),
+        ),
+        ListTile(
+          leading: const Icon(Icons.login),
+          title: const Text('Connexion'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/connexion');
+          },
+        ),
+      ],
     );
   }
 }

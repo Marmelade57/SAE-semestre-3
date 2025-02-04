@@ -1,49 +1,27 @@
-import '../connexion.dart';
-import 'detient.class.dart';
-
 class Permission {
-  final int idPerm;
-  final String nomPerm;
-  final String descPerm;
+  int? idPerm;
+  String nomPerm;
+  String descPerm;
 
   Permission({
-    required this.idPerm,
+    this.idPerm,
     required this.nomPerm,
-    required this.descPerm
+    required this.descPerm,
   });
 
-  factory Permission.fromMap(Map<String, dynamic> map) {
-    return (
-      idPerm: map['id_perm'],
-      nomPerm: map['nom_perm'],
-      descPerm: map['desc_perm']
+  factory Permission.fromJson(Map<String, dynamic> json) {
+    return Permission(
+      idPerm: json['id_perm'],
+      nomPerm: json['nom_perm'],
+      descPerm: json['desc_perm'],
     );
   }
 
-  //Pour récupérer toutes les permissions
-  static Future<List<Permission>> fetchAll() async {
-    final conn = await Connexion.getConnexion();
-
-    try {
-      final results = await conn.query('SELECT * FROM PERMISSION');
-
-      List<Permission> permissions = results.map((row) {
-        return Permission.fromMap(row.fields);
-      }).toList();
-
-      return permissions;
-    } catch (e) {
-      print('Erreur lors de la récupération des permissions : $e');
-      return [];
-    } finally {
-      await conn.close();
-    }
+  Map<String, dynamic> toJson() {
+    return {
+      'id_perm': idPerm,
+      'nom_perm': nomPerm,
+      'desc_perm': descPerm,
+    };
   }
-
-  //Pour récupérer les roles associés à la permission
-  Future<List<int>> getRoles() async {
-    return await Detient.fetchRolesByPermission(idPerm);
-  }
-
-  
 }

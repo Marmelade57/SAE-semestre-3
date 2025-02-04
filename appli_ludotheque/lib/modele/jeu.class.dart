@@ -1,110 +1,55 @@
-import '../connexion.dart';
-import 'contient.class.dart';
-import 'concerne.class.dart';
-
 class Jeu {
-  final int idJeu;
-  final String titreJeu;
-  final String descJeu;
-  final bool disponible;
-  final String lienImg;
-  final String lienYT;
-  final DateTime dateAjout;
-  final DateTime? datePublication;
-  final DateTime? dateDerniereModif;
-  final DateTime? dateArchivage;
-  final DateTime? dateSuppression;
+  int? idJeu;
+  String titreJeu;
+  String descJeu;
+  bool disponible;
+  String image;
+  String lienImage;
+  String lienYoutube;
+  DateTime? dateAjout;
+  DateTime? datePublication;
 
   Jeu({
-    required this.idJeu,
+    this.idJeu,
     required this.titreJeu,
     required this.descJeu,
     required this.disponible,
-    required this.lienImg,
-    required this.lienYT,
-    required this.dateAjout,
+    required this.image,
+    required this.lienImage,
+    required this.lienYoutube,
+    this.dateAjout,
     this.datePublication,
-    this.dateDerniereModif,
-    this.dateArchivage,
-    this.dateSuppression,
   });
 
-  factory Jeu.fromMap(Map<String, dynamic> map) {
+  factory Jeu.fromJson(Map<String, dynamic> json) {
     return Jeu(
-      idJeu: map['id_jeu'],
-      titreJeu: map['titre_jeu'],
-      descJeu: map['desc_jeu'],
-      disponible: map['disponible'] == 1,
-      lienImg: map['lien_image'],
-      lienYT: map['lien_youtube'],
-      dateAjout: DateTime.parse(map['date_ajout']),
-      datePublication: map['date_publication'] != null
-          ? DateTime.parse(map['date_publication'])
+      idJeu: json['id_jeu'],
+      titreJeu: json['titre_jeu'],
+      descJeu: json['desc_jeu'],
+      disponible: json['disponible'] == 1,
+      image: json['image'],
+      lienImage: json['lien_image'],
+      lienYoutube: json['lien_youtube'],
+      dateAjout: json['date_ajout'] != null
+          ? DateTime.parse(json['date_ajout'])
           : null,
-      dateDerniereModif: map['date_derniere_modif'] != null
-          ? DateTime.parse(map['date_derniere_modif'])
-          : null,
-      dateArchivage: map['date_archivage'] != null
-          ? DateTime.parse(map['date_archivage'])
-          : null,
-      dateSuppression: map['date_suppression'] != null
-          ? DateTime.parse(map['date_suppression'])
+      datePublication: json['date_publication'] != null
+          ? DateTime.parse(json['date_publication'])
           : null,
     );
   }
 
-  //Pour récupérer tous les jeux
-  static Future<List<Jeu>> fetchAll() async {
-    final conn = await Connexion.getConnexion();
-
-    try {
-      final results = await conn.query('SELECT * FROM JEU');
-
-      List<Jeu> jeux = results.map((row) {
-        return Jeu.fromMap(row.fields);
-      }).toList();
-
-      return jeux;
-    } catch (e) {
-      print('Erreur lors de la récupération des jeux : $e');
-      return [];
-    } finally {
-      await conn.close();
-    }
+  Map<String, dynamic> toJson() {
+    return {
+      'id_jeu': idJeu,
+      'titre_jeu': titreJeu,
+      'desc_jeu': descJeu,
+      'disponible': disponible ? 1 : 0,
+      'image': image,
+      'lien_image': lienImage,
+      'lien_youtube': lienYoutube,
+      'date_ajout': dateAjout?.toIso8601String(),
+      'date_publication': datePublication?.toIso8601String(),
+    };
   }
-
-  //Pour récupérer un jeu spécifique par ID
-  static Future<Jeu?> fetchById(int idJeu) async {
-    final conn = await Connexion.getConnexion();
-
-    try {
-      final results = await conn.query(
-        'SELECT * FROM JEU WHERE id_jeu = ?',
-        [idJeu],
-      );
-
-      if (results.isNotEmpty) {
-        return Jeu.fromMap(results.first.fields);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print('Erreur lors de la récupération du jeu $idJeu : $e');
-      return null;
-    } finally {
-      await conn.close();
-    }
-  }
-
-  //Pour récupérer les tags associés au jeu
-  Future<List<int>> getTags() async {
-    return await Contient.fetchTagsByJeu(idJeu);
-  }
-
-  // Pour récupérer les actualités associés au jeu
-  Future<List<int>> getActualites() async {
-    return await Concerne.fetchActualitesByJeu(idJeu);
-  }
-
-  
 }

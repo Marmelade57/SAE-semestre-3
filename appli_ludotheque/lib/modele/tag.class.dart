@@ -1,74 +1,31 @@
-import "../connexion.dart";
-import 'contient.class.dart';
-
-class Tag{
-  final int idTag ;
-  final String nom;
-  final String description;
-  final String typeTag;
+class Tag {
+  int? idTag;
+  String nom;
+  String description;
+  String typeTag;
 
   Tag({
-    required this.idTag,
+    this.idTag,
     required this.nom,
     required this.description,
     required this.typeTag,
   });
 
-factory Tag.fromMap(Map<String, dynamic> map) {
+  factory Tag.fromJson(Map<String, dynamic> json) {
     return Tag(
-      idTag: map['id_tag'],
-      nom: map['nom_tag'],
-      description: map['desc_tag'],
-      typeTag: map['type_tag'],
+      idTag: json['id_tag'],
+      nom: json['nom_tag'],
+      description: json['desc_tag'],
+      typeTag: json['type_tag'],
     );
   }
 
-
-    //Pour récupérer tous les tags
-  static Future<List<Tag>> fetchAll() async {
-    final conn = await Connexion.getConnexion();
-
-    try {
-      final results = await conn.query('SELECT * FROM TAG');
-
-      List<Tag> tags = results.map((row) {
-        return Tag.fromMap(row.fields);
-      }).toList();
-
-      return tags;
-    } catch (e) {
-      print('Erreur lors de la récupération des tags : $e');
-      return [];
-    } finally {
-      await conn.close();
-    }
-  }
-
-  //Pour récupérer un tag spécifique par ID
-  static Future<Tag?> fetchById(int idTag) async {
-    final conn = await Connexion.getConnexion();
-
-    try {
-      final results = await conn.query(
-        'SELECT * FROM TAG WHERE id_tag = ?',
-        [idTag],
-      );
-
-      if (results.isNotEmpty) {
-        return Tag.fromMap(results.first.fields);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print('Erreur lors de la récupération du tag $idTag : $e');
-      return null;
-    } finally {
-      await conn.close();
-    }
-  }
-
-  //Pour récupérer les jeux associés au tag
-  Future<List<int>> getJeux() async {
-    return await Contient.fetchJeuxByTag(idTag);
+  Map<String, dynamic> toJson() {
+    return {
+      'id_tag': idTag,
+      'nom_tag': nom,
+      'desc_tag': description,
+      'type_tag': typeTag,
+    };
   }
 }

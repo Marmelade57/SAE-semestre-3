@@ -16,50 +16,8 @@ class PageActualites extends StatelessWidget {
         ),
       ),
       drawer: Drawer(
-        child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  //color: Color.fromARGB(255, 207, 205, 205),
-                  image: DecorationImage(image: AssetImage("../../images/logo.png"))
-                ),
-                child: Text(
-                  '',
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home_outlined),
-                title: const Text('Accueil'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/accueil');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.newspaper_outlined),
-                title: const Text('Actualité'),
-                onTap: () => Navigator.pop(context),
-              ),
-              ListTile(
-                leading: const Icon(Icons.question_mark_outlined),
-                title: const Text('À propos'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/apropos');
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.login),
-                title: const Text('Connexion'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/connexion');
-                },
-              ),
-            ],
-          ),
-        ),
+        child: _contenuMenu(context),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
@@ -70,12 +28,12 @@ class PageActualites extends StatelessWidget {
                 crossAxisCount: 1,
                 shrinkWrap: true,
                 childAspectRatio: double.parse("1.25"),
-                physics: const NeverScrollableScrollPhysics(), // c'est quoi ? Demander à Gabin
+                physics: const NeverScrollableScrollPhysics(),
                 mainAxisSpacing: 32,
                 children: List.generate(4, (index) {
                   return GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/actu'),
-                    child: _buildGameCard(
+                    child: _constructeurCarteActu(
                       'Nom actualité n°${index + 1}',
                       "Ceci est la description courte de l'actualité numéro ${index + 1}"
                     ),
@@ -89,7 +47,52 @@ class PageActualites extends StatelessWidget {
     );
   }
 
-  Widget _buildGameCard(String titre, String contenu) {
+  Widget _contenuMenu(BuildContext context){
+    return ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        const DrawerHeader(
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage("../../images/logo.png"))
+          ),
+          child: Text(
+            '',
+          ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.home_outlined),
+          title: const Text('Accueil'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/accueil');
+          }
+        ),
+        ListTile(
+          leading: const Icon(Icons.newspaper_outlined),
+          title: const Text('Actualités'),
+          onTap: () => Navigator.pop(context),
+        ),
+        ListTile(
+          leading: const Icon(Icons.question_mark_outlined),
+          title: const Text('À propos'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/apropos');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.login),
+          title: const Text('Connexion'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/connexion');
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _constructeurCarteActu(String titre, String contenu) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
