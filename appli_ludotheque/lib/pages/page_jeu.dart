@@ -1,102 +1,119 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../dao.class.dart';
+
+DAO dao = DAO();
 
 class PageJeu extends StatelessWidget {
   const PageJeu({super.key});
 
+  // Fonction pour récupérer les informations d'un jeu
+  Future<Map<String, dynamic>?> _getGameInfoById(DAO dao, int gameId) async {
+    List<Map<String, dynamic>> data = await dao.getAll("JEU");
+    Map<String, dynamic>? gameInfo = data.firstWhere(
+        (item) => item['id_jeu'] == gameId // Si aucun jeu trouvé, retourne null
+        );
+    return gameInfo;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Récupérer l'ID du jeu depuis les arguments de la route
+    int gameId = ModalRoute.of(context)?.settings.arguments as int;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Détails du jeu'),
+        title: Text('Détails du jeu n°$gameId'),
       ),
-
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  _nomEtPhotoJeu(context),
-                  const SizedBox(width: 16),
-                  _videoJeu(context)
-                ],
-              ),
-              const SizedBox(height: 32),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _titreDesc(context),
-                  const SizedBox(height: 16),
-
-                  GridView.count(
-                    crossAxisCount: 3,
-                    shrinkWrap: true,
-                    childAspectRatio: double.parse("5"),
-                    crossAxisSpacing: 16,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: List.generate(3, (index) {
-                      return GestureDetector(
-                        // onTap: () => Navigator.pushNamed(context, '/act'),
-                        child: _constructeurTag(
-                          'Tag n°${index + 1}'
-                        ),
-                      );
-                    }),
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  _contenuDesc(context)
-                ],
-              )
-            ],
-          ),
-        ),
+      body: FutureBuilder<Map<String, dynamic>?>(
+        future: _getGameInfoById(dao, gameId),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return const Center(
+                child: Text("Erreur lors du chargement des données."));
+          } else if (!snapshot.hasData || snapshot.data == null) {
+            return const Center(child: Text("Aucun jeu trouvé."));
+          } else {
+            // Récupérer les données du jeu
+            Map<String, dynamic> gameInfo = snapshot.data!;
+            return _afficherDetailsJeu(context, gameInfo);
+          }
+        },
       ),
     );
   }
 
-  Widget _nomEtPhotoJeu(BuildContext context) {
+  // Widget pour afficher les détails du jeu
+  Widget _afficherDetailsJeu(
+      BuildContext context, Map<String, dynamic> gameInfo) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              _nomEtPhotoJeu(context, gameInfo),
+              const SizedBox(width: 16),
+              Expanded(child: _videoJeu(context, gameInfo['lien_youtube'])),
+            ],
+          ),
+          const SizedBox(height: 32),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _titreDesc("Description"),
+              const SizedBox(height: 16),
+              _contenuDesc(
+                  gameInfo['desc_jeu'] ?? "Aucune description disponible."),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Widget pour le nom et la photo du jeu
+  Widget _nomEtPhotoJeu(BuildContext context, Map<String, dynamic> gameInfo) {
+    String titre = gameInfo['titre_jeu'];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 200,
-          width: 225,
+          height: 175,
+          width: 200,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Icon(Icons.image, size: 64),
+          child: gameInfo['image'] != null
+              ? Image.network(gameInfo['image'], fit: BoxFit.cover)
+              : Image.asset("assets/images/jeux/$titre.png"),
         ),
-                  
         const SizedBox(height: 16),
-                  
         Container(
           padding: const EdgeInsets.all(16),
+          width: 200,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Nom du jeu',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+          child: Text(
+            gameInfo['titre_jeu'] ?? 'Nom du jeu',
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _videoJeu(BuildContext context) {
+  // Widget pour la vidéo explicative
+  Widget _videoJeu(BuildContext context, String url) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -107,16 +124,14 @@ class PageJeu extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: const Text(
-            "Vidéo explicative", 
+            "Vidéo explicative",
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
-                  
         const SizedBox(height: 16),
-                  
         Container(
           height: 200,
           width: 225,
@@ -124,22 +139,39 @@ class PageJeu extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Icon(Icons.play_circle, size: 64),
+          child: InkWell(
+            onTap: () {
+              // Ouvrir l'URL dans un navigateur ou une autre action ici
+              launch(
+                  url); // Assurez-vous d'avoir importé le package 'url_launcher'
+            },
+            child: Center(
+              child: Text(
+                "Voir la vidéo",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );
   }
 
-  Widget _titreDesc(BuildContext context) {
+  // Widget pour le titre de la description
+  Widget _titreDesc(String description) {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: const Text(
-        "Description",
-        style: TextStyle(
+      child: Text(
+        description,
+        style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
         ),
@@ -147,34 +179,20 @@ class PageJeu extends StatelessWidget {
     );
   }
 
-  Widget _contenuDesc(BuildContext context) {
+  // Widget pour le contenu de la description
+  Widget _contenuDesc(String contenu) {
     return Container(
-      height: 250,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: const Text(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit leo, mattis sed suscipit sit amet, dignissim non mi. Pellentesque accumsan et turpis eget dignissim. Suspendisse potenti. Donec elementum mollis molestie. Aenean et faucibus metus. Duis sit amet lorem enim. Maecenas viverra magna in magna volutpat, ac ultrices urna suscipit. Nam rutrum blandit tempus. Cras tempor tempor est, vel pharetra nisl consequat a. Nam ultrices tellus et aliquet imperdiet. Pellentesque tempus pharetra ipsum a tincidunt. Donec vehicula non sem cursus vestibulum. Praesent non sollicitudin urna. \n Nulla quis posuere metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis elementum nisi nec imperdiet suscipit. Suspendisse sit amet efficitur velit. Praesent rhoncus sagittis dui vel aliquam. Etiam ut eleifend dolor. Fusce tristique risus quis auctor hendrerit. Aliquam vehicula, lectus sed porta sollicitudin, nibh velit euismod odio, eget aliquet eros odio vel arcu. Aliquam vehicula dui interdum tincidunt sagittis. Sed cursus leo quis augue auctor posuere. Curabitur vel bibendum quam. Suspendisse ut sem sit amet nunc lobortis finibus. Sed maximus ullamcorper velit, at laoreet orci sodales vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi sagittis ullamcorper mi eu iaculis."
-      ),
-    );
-  }
-
-  Widget _constructeurTag(String nomTag){
-    return Container(
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Text(
-            nomTag,
-            textAlign: TextAlign.center,
-          ),
-        ],
+      child: Text(
+        contenu,
+        style: const TextStyle(fontSize: 24),
+        softWrap: true, // Le texte va se replier si nécessaire
+        overflow: TextOverflow
+            .fade, // En cas de trop grand texte, il ne débordera pas
       ),
     );
   }
